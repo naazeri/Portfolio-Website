@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <partial name="_MetaTags" />
+    <title>@ViewData["Title"] - Resume Dashboard</title>
+    <partial name="_HeaderReferences" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <div class="app-wrapper">
+        <partial name="_TopNavBar" />
+        @await Component.InvokeAsync("LeftSideBar")
+
+        <main class="app-main">
+            @RenderBody()
+        </main>
+
+        <footer class="app-footer">
+            &copy; 2024 - Resume - <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </footer>
+    </div>
+
+    <partial name="_FooterReferences" />
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
