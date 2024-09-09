@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Resume.Bussines.Services.Implementations;
 using Resume.Bussines.Services.Interfaces;
@@ -28,6 +29,22 @@ public static class DIContainer
       {
         configure.MigrationsAssembly("Resume.Web");
       });
+    });
+  }
+
+  public static void ConfigAuth(this IServiceCollection services, IConfiguration config)
+  {
+    services.AddAuthentication(options =>
+    {
+      options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+      options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+      options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+      options.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    }).AddCookie(options =>
+    {
+      options.LoginPath = "/login";
+      options.LogoutPath = "/logout";
+      options.ExpireTimeSpan = TimeSpan.FromDays(config.GetValue<int>("Cookie:ExpireDays"));
     });
   }
 

@@ -1,6 +1,7 @@
 using Resume.Bussines.Services.Interfaces;
 using Resume.DAL.Models;
 using Resume.DAL.Repositories.Interfaces;
+using Resume.DAL.ViewModels.Account;
 using Resume.DAL.ViewModels.User;
 
 namespace Resume.Bussines.Services.Implementations;
@@ -12,6 +13,12 @@ public class UserService(IUserRepository userRepository) : IUserService
   public async Task<FilterUserViewModel> GetAllAsync(FilterUserViewModel filter)
   {
     return await userRepository.GetAllAsync(filter);
+  }
+
+  public async Task<User?> GetByEmailAsync(string email)
+  {
+    email = email.Trim().ToLower();
+    return await userRepository.GetByEmailAsync(email);
   }
 
   public async Task<CreateUserResult> AddAsync(CreateUserViewModel model)
@@ -85,6 +92,24 @@ public class UserService(IUserRepository userRepository) : IUserService
     await userRepository.SaveChangesAsync();
 
     return EditUserResult.Success;
+  }
+
+  public async Task<LoginResult> LoginAsync(LoginViewModel model)
+  {
+    model.Email = model.Email.Trim().ToLower();
+    var user = await userRepository.GetByEmailAsync(model.Email);
+
+    if (user == null)
+    {
+      return LoginResult.UserNotFound;
+    }
+
+    if (user.Password != model.Password)
+    {
+      return LoginResult.Error;
+    }
+
+    return LoginResult.Success;
   }
 
   #endregion

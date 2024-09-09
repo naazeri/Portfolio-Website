@@ -50,6 +50,12 @@ public class UserRepository(AppDbContext context) : IUserRepository
       .FirstOrDefaultAsync(x => x.Id == id);
   }
 
+  public async Task<User?> GetByEmailAsync(string email)
+  {
+    return await context.Users
+      .FirstOrDefaultAsync(x => x.Email == email);
+  }
+
   public async Task AddAsync(User user)
   {
     await context.Users.AddAsync(user);

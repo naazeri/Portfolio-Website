@@ -8,7 +8,7 @@ public class BasePaging<T>
   {
     Page = 1;
     TakeEntity = 10;
-    HowManyPagesShowBeforeAndAfterCurrentPage = 5;
+    HowManyPagesShowBeforeAndAfterCurrentPage = 3;
     Entities = [];
   }
 

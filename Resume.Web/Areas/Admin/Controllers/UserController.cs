@@ -14,6 +14,7 @@ public class UserController(IUserService userService) : AdminBaseController
     }
     #endregion
 
+    #region Actions
     #region Create
     public IActionResult Create()
     {
@@ -32,9 +33,15 @@ public class UserController(IUserService userService) : AdminBaseController
 
         var result = await userService.AddAsync(model);
 
-        if (result == CreateUserResult.Success)
+        switch (result)
         {
-            return RedirectToAction(nameof(List));
+            case CreateUserResult.Success:
+                TempData[SuccessMessage] = "New user created successfully.";
+                return RedirectToAction(nameof(List));
+
+            case CreateUserResult.Error:
+                TempData[ErrorMessage] = "Error, please try again.";
+                break;
         }
 
         return View();
@@ -70,15 +77,32 @@ public class UserController(IUserService userService) : AdminBaseController
         switch (result)
         {
             case EditUserResult.Success:
+                TempData[SuccessMessage] = "User updated successfully.";
                 return RedirectToAction(nameof(List));
+
             case EditUserResult.UserNotFound:
-                return NotFound();
+                TempData[ErrorMessage] = "User not found.";
+                break;
+
+            case EditUserResult.EmailAlreadyExists:
+                TempData[ErrorMessage] = "Email already exists.";
+                break;
+
+            case EditUserResult.MobileAlreadyExists:
+                TempData[ErrorMessage] = "Mobile already exists.";
+                break;
+
+            case EditUserResult.Error:
+                TempData[ErrorMessage] = "Error, please try again.";
+                break;
+
             default:
                 break;
         }
         #endregion
 
-        return View();
+        return View(model);
     }
+    #endregion
     #endregion
 }

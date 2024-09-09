@@ -10,43 +10,57 @@
 
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Datatables</h5>
-          <p>Add lightweight datatables to your project with using the <a
-              href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library.
-            Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a
-              href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
-
-          <!-- Table with stripped rows -->
-          <table class="table datatable">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th data-type="date" data-format="YYYY/DD/MM">Created Date</th>
-                <th data-type="date" data-format="YYYY/DD/MM">Updated Date</th>
-                <th>Active</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
+          <h5 class="card-title">Users</h5>
+          @if (Model != null && Model.Entities != null && Model.Entities.Any())
+          {
+            <!-- Table with stripped rows -->
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Mobile</th>
+                  <th scope="col" data-type="date" data-format="YYYY/DD/MM">Created Date</th>
+                  <th scope="col" data-type="date" data-format="YYYY/DD/MM">Updated Date</th>
+                  <th scope="col">Active</th>
+                </tr>
+              </thead>
+              <tbody>
                 @foreach (var user in Model.Entities)
                 {
-                  <td>@user.Id</td>
-                  <td>@user.FirstName</td>
-                  <td>@user.LastName</td>
-                  <td>@user.Email</td>
-                  <td>@user.Mobile</td>
-                  <td>@user.CreateDate</td>
-                  <td>@user.UpdateDate</td>
-                  <td>@user.IsActive</td>
+                  <tr>
+                    <th scope="row">@user.Id</th>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Mobile</td>
+                    <td>@user.CreateDate</td>
+                    <td>@user.UpdateDate</td>
+                    <td>
+                      @if (user.IsActive)
+                      {
+                        <span class="badge rounded-pill bg-success">Active</span>
+                      }
+                      else
+                      {
+                        <span class="badge rounded-pill bg-danger">Deactive</span>
+                      }
+                    </td>
+                  </tr>
                 }
-              </tr>
-            </tbody>
-          </table>
-          <!-- End Table with stripped rows -->
+              </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+            <!-- Render the pagination controls -->
+            <partial name="_AdminPagination" model="@Model.GetCurrentPaging()" />
+          }
+          else
+          {
+            <partial name="_AdminNotFound" />
+          }
 
         </div>
       </div>

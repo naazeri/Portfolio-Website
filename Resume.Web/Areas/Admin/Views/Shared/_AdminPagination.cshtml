@@ -1,0 +1,28 @@
+@using Resume.DAL.ViewModels.Common
+@model PagingViewModel
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <!-- "Previous" button -->
+    <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+      <a class="page-link" href="@Url.Action("List", new { page = Model.Page - 1 })" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+
+    <!-- Page numbers -->
+    @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+    {
+      <li class="page-item @(Model.Page == i ? "active" : "")">
+        <a class="page-link" href="@Url.Action("List", new { page = i })">@i</a>
+      </li>
+    }
+
+    <!-- "Next" button -->
+    <li class="page-item @(Model.Page == Model.PageCount ? "disabled" : "")">
+      <a class="page-link" href="@Url.Action("List", new { page = Model.Page + 1 })" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

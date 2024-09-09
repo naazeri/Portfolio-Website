@@ -6,6 +6,7 @@ var config = builder.Configuration;
 builder.Services.AddControllersWithViews();
 builder.Services.RegisterService();
 builder.Services.ConfigDB(config);
+builder.Services.ConfigAuth(config);
 
 var app = builder.Build();
 
@@ -22,6 +23,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
