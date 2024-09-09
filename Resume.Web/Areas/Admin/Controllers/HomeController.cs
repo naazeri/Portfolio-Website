@@ -10,5 +10,10 @@ public class HomeController : AdminBaseController
     {
         return View();
     }
+
+    public IActionResult Blank()
+    {
+        return View();
+    }
     #endregion
 }

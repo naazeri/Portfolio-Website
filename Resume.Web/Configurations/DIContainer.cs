@@ -24,7 +24,10 @@ public static class DIContainer
   {
     services.AddDbContext<AppDbContext>(options =>
     {
-      options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+      options.UseSqlServer(config.GetConnectionString("DefaultConnection"), configure =>
+      {
+        configure.MigrationsAssembly("Resume.Web");
+      });
     });
   }
 
