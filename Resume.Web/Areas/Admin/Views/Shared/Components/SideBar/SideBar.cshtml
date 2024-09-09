@@ -1,3 +1,6 @@
+@{
+  UserDetailsViewModel user = ViewData["User"] as UserDetailsViewModel ?? new UserDetailsViewModel();
+}
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -16,12 +19,12 @@
       </a>
       <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
-          <a asp-controller="User" asp-action="List">
+          <a asp-area="Admin" asp-controller="User" asp-action="List">
             <i class="bi bi-circle"></i><span>List</span>
           </a>
         </li>
         <li>
-          <a href="components-accordion.html">
+          <a asp-area="Admin" asp-controller="User" asp-action="Create">
             <i class="bi bi-circle"></i><span>Create</span>
           </a>
         </li>

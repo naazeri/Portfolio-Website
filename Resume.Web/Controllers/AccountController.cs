@@ -20,6 +20,7 @@ public class AccountController(IUserService userService) : SiteBaseController
     {
       return RedirectToAction("Index", "Home", new { area = "Admin" });
     }
+
     return View();
   }
 
@@ -47,11 +48,11 @@ public class AccountController(IUserService userService) : SiteBaseController
         #region Authentication
 
         var claims = new List<Claim>()
-                    {
-                        new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                        new(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
-                        new(ClaimTypes.MobilePhone, user.Mobile)
-                    };
+        {
+          new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+          new(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+          new(ClaimTypes.MobilePhone, user.Mobile)
+        };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
@@ -69,12 +70,12 @@ public class AccountController(IUserService userService) : SiteBaseController
         return RedirectToAction("Index", "Home", new { area = "Admin" });
 
       case LoginResult.UserNotFound:
-        TempData[ErrorMessage] = "User not found.";
-        return View(model);
+        TempData[ErrorMessage] = "Email or Password is incorrect.";
+        break;
 
       case LoginResult.Error:
-        TempData[ErrorMessage] = "Error, please try again.";
-        return View(model);
+        TempData[ErrorMessage] = "Email or Password is incorrect.";
+        break;
     }
 
     return View(model);
@@ -88,7 +89,7 @@ public class AccountController(IUserService userService) : SiteBaseController
   public async Task<IActionResult> Logout()
   {
     await HttpContext.SignOutAsync();
-    return RedirectToAction("Index", "Home");
+    return RedirectToAction("Login", "Account");
   }
 
   #endregion

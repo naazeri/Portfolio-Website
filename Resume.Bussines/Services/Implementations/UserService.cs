@@ -1,3 +1,4 @@
+using Resume.Bussines.Security;
 using Resume.Bussines.Services.Interfaces;
 using Resume.DAL.Models;
 using Resume.DAL.Repositories.Interfaces;
@@ -29,7 +30,7 @@ public class UserService(IUserRepository userRepository) : IUserService
       LastName = model.LastName,
       Mobile = model.Mobile,
       Email = model.Email,
-      Password = model.Password,
+      Password = model.Password.Trim().EncodePasswordMd5(),
       IsActive = model.IsActive,
       CreateDate = DateTime.Now,
       UpdateDate = DateTime.Now,
@@ -57,6 +58,27 @@ public class UserService(IUserRepository userRepository) : IUserService
       Mobile = user.Mobile,
       Email = user.Email,
       IsActive = user.IsActive
+    };
+  }
+
+  public async Task<UserDetailsViewModel?> GetForDetailsByIdAsync(int id)
+  {
+    var user = await userRepository.GetByIdAsync(id);
+    if (user == null)
+    {
+      return null;
+    }
+
+    return new UserDetailsViewModel
+    {
+      Id = user.Id,
+      FirstName = user.FirstName,
+      LastName = user.LastName,
+      Mobile = user.Mobile,
+      Email = user.Email,
+      IsActive = user.IsActive,
+      CreateDate = user.CreateDate,
+      UpdateDate = user.UpdateDate
     };
   }
 
@@ -104,7 +126,9 @@ public class UserService(IUserRepository userRepository) : IUserService
       return LoginResult.UserNotFound;
     }
 
-    if (user.Password != model.Password)
+    string hashPassword = model.Password.Trim().EncodePasswordMd5();
+
+    if (user.Password != hashPassword)
     {
       return LoginResult.Error;
     }

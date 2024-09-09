@@ -7,15 +7,19 @@ namespace Resume.Web.Areas.Admin.Controllers;
 public class UserController(IUserService userService) : AdminBaseController
 {
   #region List
+
   public async Task<IActionResult> List(FilterUserViewModel filter)
   {
     var model = await userService.GetAllAsync(filter);
     return View(model);
   }
+
   #endregion
 
   #region Actions
+
   #region Create
+
   public IActionResult Create()
   {
     return View();
@@ -99,10 +103,13 @@ public class UserController(IUserService userService) : AdminBaseController
       default:
         break;
     }
+
     #endregion
 
     return View(model);
   }
+
   #endregion
+
   #endregion
 }

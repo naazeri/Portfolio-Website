@@ -25,6 +25,7 @@
                   <th scope="col" data-type="date" data-format="YYYY/DD/MM">Created Date</th>
                   <th scope="col" data-type="date" data-format="YYYY/DD/MM">Updated Date</th>
                   <th scope="col">Active</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -47,6 +48,19 @@
                       {
                         <span class="badge rounded-pill bg-danger">Deactive</span>
                       }
+                    </td>
+                    <td>
+                      <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i
+                            class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
+                          <li>
+                            <a class="dropdown-item" asp-action="Update" asp-route-id="@user.Id">
+                              <i class="bi bi-pencil-fill"></i>Edit
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
                     </td>
                   </tr>
                 }

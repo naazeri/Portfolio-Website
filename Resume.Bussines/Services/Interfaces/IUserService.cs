@@ -12,6 +12,7 @@ public interface IUserService
   Task<User?> GetByEmailAsync(string email);
   Task<CreateUserResult> AddAsync(CreateUserViewModel model);
   Task<EditUserViewModel?> GetForEditByIdAsync(int id);
+  Task<UserDetailsViewModel?> GetForDetailsByIdAsync(int id);
   Task<EditUserResult> UpdateAsync(EditUserViewModel model);
   Task<LoginResult> LoginAsync(LoginViewModel model);
 

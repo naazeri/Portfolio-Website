@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+  ViewData["BrandName"] = "ResumeAdmin";
+}
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 
 <head>
@@ -23,7 +26,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a asp-area="Admin" asp-controller="Home" asp-action="" class="logo d-flex align-items-center">
         <img src="~/Admin/assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <span class="d-none d-lg-block">@ViewData["BrandName"]</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -35,7 +38,7 @@
       </form>
     </div><!-- End Search Bar -->
 
-    <partial name="_TopNavBar" />
+    @await Component.InvokeAsync("NavBar")
 
   </header><!-- End Header -->
 
@@ -49,7 +52,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>@ViewData["BrandName"]</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
