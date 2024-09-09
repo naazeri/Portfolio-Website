@@ -10,30 +10,7 @@ end_of_line = crlf
 insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = space
-indent_size = 4
-
-# Matches C# files
-[*.cs]
-indent_style = space
-indent_size = 4
-dotnet_sort_system_directives_first = true
-csharp_new_line_before_open_brace = all
-csharp_new_line_before_else = true
-csharp_new_line_before_catch = true
-csharp_new_line_before_finally = true
-csharp_new_line_before_members_in_object_initializers = true
-csharp_new_line_before_members_in_anonymous_types = true
-csharp_preserve_single_line_blocks = false
-csharp_preserve_single_line_statements = false
-csharp_style_namespace_declarations = file_scoped
-csharp_space_after_cast = true
-csharp_space_after_keywords_in_control_flow_statements = true
-csharp_style_var_for_built_in_types = true
-csharp_style_var_when_type_is_apparent = true
-csharp_style_var_elsewhere = false
-csharp_style_prefer_auto_properties = true
-csharp_style_expression_bodied_methods = true
-
-[*.json, *.js, *.css, *.html, *.cshtml]
-indent_style = space
 indent_size = 2
+
+[*.json]
+indent_size = 4

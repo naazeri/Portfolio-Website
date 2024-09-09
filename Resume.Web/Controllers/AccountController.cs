@@ -9,89 +9,89 @@ namespace Resume.Web.Controllers;
 
 public class AccountController(IUserService userService) : SiteBaseController
 {
-    #region Actions
+  #region Actions
 
-    #region Login
+  #region Login
 
-    [HttpGet("/login")]
-    public IActionResult Login()
+  [HttpGet("/login")]
+  public IActionResult Login()
+  {
+    if (User.Identity?.IsAuthenticated ?? false)
     {
-        if (User.Identity?.IsAuthenticated ?? false)
-        {
-            return RedirectToAction("Index", "Home", new { area = "Admin" });
-        }
-        return View();
+      return RedirectToAction("Index", "Home", new { area = "Admin" });
+    }
+    return View();
+  }
+
+  [HttpPost("/login")]
+  public async Task<IActionResult> Login(LoginViewModel model)
+  {
+    if (!ModelState.IsValid)
+    {
+      return View(model);
     }
 
-    [HttpPost("/login")]
-    public async Task<IActionResult> Login(LoginViewModel model)
+    var result = await userService.LoginAsync(model);
+
+    switch (result)
     {
-        if (!ModelState.IsValid)
+      case LoginResult.Success:
+        var user = await userService.GetByEmailAsync(model.Email);
+
+        if (user == null)
         {
-            return View(model);
+          TempData[ErrorMessage] = "User not found.";
+          return View(model);
         }
 
-        var result = await userService.LoginAsync(model);
+        #region Authentication
 
-        switch (result)
-        {
-            case LoginResult.Success:
-                var user = await userService.GetByEmailAsync(model.Email);
-
-                if (user == null)
-                {
-                    TempData[ErrorMessage] = "User not found.";
-                    return View(model);
-                }
-
-                #region Authentication
-
-                var claims = new List<Claim>()
+        var claims = new List<Claim>()
                     {
                         new(ClaimTypes.NameIdentifier, user.Id.ToString()),
                         new(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
                         new(ClaimTypes.MobilePhone, user.Mobile)
                     };
 
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(identity);
-                var properties = new AuthenticationProperties
-                {
-                    IsPersistent = true, // remember me
-                };
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+        var properties = new AuthenticationProperties
+        {
+          IsPersistent = true, // remember me
+        };
 
-                await HttpContext.SignInAsync(principal, properties);
+        await HttpContext.SignInAsync(principal, properties);
 
-                TempData[SuccessMessage] = "خوش آمدید!";
+        TempData[SuccessMessage] = "خوش آمدید!";
 
-                #endregion
+        #endregion
 
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
+        return RedirectToAction("Index", "Home", new { area = "Admin" });
 
-            case LoginResult.UserNotFound:
-                TempData[ErrorMessage] = "User not found.";
-                return View(model);
+      case LoginResult.UserNotFound:
+        TempData[ErrorMessage] = "User not found.";
+        return View(model);
 
-            case LoginResult.Error:
-                TempData[ErrorMessage] = "Error, please try again.";
-                return View(model);
-        }
-
+      case LoginResult.Error:
+        TempData[ErrorMessage] = "Error, please try again.";
         return View(model);
     }
 
-    #endregion
+    return View(model);
+  }
 
-    #region Logout
+  #endregion
 
-    [HttpGet("/logout")]
-    public async Task<IActionResult> Logout()
-    {
-        await HttpContext.SignOutAsync();
-        return RedirectToAction("Index", "Home");
-    }
+  #region Logout
 
-    #endregion
+  [HttpGet("/logout")]
+  public async Task<IActionResult> Logout()
+  {
+    await HttpContext.SignOutAsync();
+    return RedirectToAction("Index", "Home");
+  }
 
-    #endregion
+  #endregion
+
+  #endregion
 }

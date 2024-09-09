@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <partial name="_MetaTags" />
-    <title>@ViewData["Title"] - Resume</title>
-    <partial name="_HeaderReferences" />
-    @await RenderSectionAsync("Styles", required: false)
+  <partial name="_MetaTags" />
+  <title>@ViewData["Title"] - Resume</title>
+  <partial name="_HeaderReferences" />
+  @await RenderSectionAsync("Styles", required: false)
 
-    <!-- =======================================================
+  <!-- =======================================================
     * Template Name: MyResume
     * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
     * Updated: Jun 29 2024 with Bootstrap v5.3.3
@@ -17,29 +17,29 @@
 </head>
 
 <body class="starter-page-page">
-    <header id="header" class="header d-flex flex-column justify-content-center">
-        <partial name="_SideNavBar" />
-    </header>
+  <header id="header" class="header d-flex flex-column justify-content-center">
+    <partial name="_SideNavBar" />
+  </header>
 
-    <main class="main">
-        @if (!string.Equals(Context.Request.Path, "/", StringComparison.OrdinalIgnoreCase))
-        {
-            @await Component.InvokeAsync("Header")
-        }
+  <main class="main">
+    @if (!string.Equals(Context.Request.Path, "/", StringComparison.OrdinalIgnoreCase))
+    {
+      @await Component.InvokeAsync("Header")
+    }
 
-        @RenderBody()
-    </main>
+    @RenderBody()
+  </main>
 
-    <partial name="_Footer" />
+  <partial name="_Footer" />
 
-    <!-- Scroll Top -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
-    <partial name="_Preloader" />
+  <partial name="_Preloader" />
 
-    <partial name="_FooterReferences" />
-    @await RenderSectionAsync("Scripts", required: false)
+  <partial name="_FooterReferences" />
+  @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>
