@@ -1,7 +1,11 @@
-var builder = WebApplication.CreateBuilder(args);
+using Resume.Web.Configurations;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
+
 builder.Services.AddControllersWithViews();
+builder.Services.RegisterService();
+builder.Services.ConfigDB(config);
 
 var app = builder.Build();
 
