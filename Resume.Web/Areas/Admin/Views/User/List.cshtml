@@ -10,6 +10,27 @@
 
       <div class="card">
         <div class="card-body">
+          <h5 class="card-title">Search</h5>
+          <form class="row g-3">
+            <div class="col-auto">
+              <label asp-for="Email" class="form-label"></label>
+              <input asp-for="Email" type="text" class="form-control">
+            </div>
+            <div class="col-auto">
+              <label asp-for="Mobile" class="form-label"></label>
+              <input asp-for="Mobile" type="tel" class="form-control">
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
           <h5 class="card-title">Users</h5>
           @if (Model != null && Model.Entities != null && Model.Entities.Any())
           {

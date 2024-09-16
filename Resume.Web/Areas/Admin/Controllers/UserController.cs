@@ -62,7 +62,7 @@ public class UserController(IUserService userService) : AdminBaseController
       return NotFound();
     }
 
-    return View();
+    return View(model);
   }
 
   [HttpPost]

@@ -11,20 +11,20 @@ public class UserRepository(AppDbContext context) : IUserRepository
   #region Methods
   public async Task<FilterUserViewModel> GetAllAsync(FilterUserViewModel filter)
   {
-    var query = context.Users
+    var query = context.Users.OrderByDescending(x => x.CreateDate)
       .AsQueryable();
 
     #region Filter
     if (!string.IsNullOrEmpty(filter.Mobile))
     {
       query = query
-        .Where(x => x.Mobile.Contains(filter.Mobile));
+        .Where(x => EF.Functions.Like(x.Mobile, $"%{filter.Mobile}%"));
     }
 
     if (!string.IsNullOrEmpty(filter.Email))
     {
       query = query
-        .Where(x => x.Email.Contains(filter.Email));
+        .Where(x => EF.Functions.Like(x.Email, $"%{filter.Email}%"));
     }
     #endregion
 
