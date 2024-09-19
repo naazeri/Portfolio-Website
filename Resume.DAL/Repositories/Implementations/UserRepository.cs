@@ -56,14 +56,14 @@ public class UserRepository(AppDbContext context) : IUserRepository
       .FirstOrDefaultAsync(x => x.Email == email);
   }
 
-  public async Task AddAsync(User user)
+  public async Task AddAsync(User model)
   {
-    await context.Users.AddAsync(user);
+    await context.Users.AddAsync(model);
   }
 
-  public void Update(User user)
+  public void Update(User model)
   {
-    context.Users.Update(user);
+    context.Users.Update(model);
   }
 
   public async Task<bool> IsEmailExistsAsync(int id, string email)

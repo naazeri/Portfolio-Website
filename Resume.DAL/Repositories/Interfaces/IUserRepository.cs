@@ -10,8 +10,8 @@ public interface IUserRepository
   Task<FilterUserViewModel> GetAllAsync(FilterUserViewModel filter);
   Task<User?> GetByIdAsync(int id);
   Task<User?> GetByEmailAsync(string email);
-  Task AddAsync(User user);
-  void Update(User user);
+  Task AddAsync(User model);
+  void Update(User model);
   Task<bool> IsEmailExistsAsync(int id, string email);
   Task<bool> IsMobileExistsAsync(int id, string mobile);
   Task SaveChangesAsync();

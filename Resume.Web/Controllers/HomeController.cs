@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Resume.Web.Controllers;
 
-public class HomeController(ILogger<HomeController> logger) : Controller
+public class HomeController() : SiteBaseController
 {
-  private readonly ILogger<HomeController> _logger = logger;
 
   public IActionResult Index()
   {

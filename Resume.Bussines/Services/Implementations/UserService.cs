@@ -32,8 +32,6 @@ public class UserService(IUserRepository userRepository) : IUserService
       Email = model.Email,
       Password = model.Password.Trim().EncodePasswordMd5(),
       IsActive = model.IsActive,
-      CreateDate = DateTime.Now,
-      UpdateDate = DateTime.Now,
     };
 
     await userRepository.AddAsync(user);
@@ -108,7 +106,6 @@ public class UserService(IUserRepository userRepository) : IUserService
     user.Mobile = model.Mobile;
     user.Email = model.Email;
     user.IsActive = model.IsActive;
-    user.UpdateDate = DateTime.Now;
 
     userRepository.Update(user);
     await userRepository.SaveChangesAsync();
