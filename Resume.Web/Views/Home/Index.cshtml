@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Resume.DAL.ViewModels.ContactUs;
+@model CreateContactUsViewModel;
+@{
   ViewData["Title"] = "Reza Nazeri | رضا ناظری";
 }
 
@@ -759,29 +761,39 @@
       </div>
 
       <div class="col-lg-8">
-        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+        <form asp-action="" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
           <div class="row gy-4">
 
             <div class="col-md-6">
-              <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+              <input asp-for="FullName" type="text" class="form-control" placeholder="Your Name" required>
+              <span asp-validation-for="FullName" class="text-danger"></span>
             </div>
 
             <div class="col-md-6 ">
-              <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+              <input asp-for="Email" type="email" class="form-control" placeholder="Your Email" required>
+              <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <div class="col-md-12">
-              <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+              <input asp-for="Title" type="text" class="form-control" placeholder="Subject" required>
+              <span asp-validation-for="Title" class="text-danger"></span>
             </div>
 
             <div class="col-md-12">
-              <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+              <textarea asp-for="Message" class="form-control" rows="6" placeholder="Message" required></textarea>
+              <span asp-validation-for="Message" class="text-danger"></span>
             </div>
 
             <div class="col-md-12 text-center">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+              @* <div class="loading">Loading</div> *@
+              @if (TempData["SuccessMessage"] != null)
+              {
+                <div class="sent-message d-block">@TempData["SuccessMessage"]</div>
+              }
+              else if (TempData["ErrorMessage"] != null)
+              {
+                <div class="error-message d-block">@TempData["ErrorMessage"]</div>
+              }
 
               <button type="submit">Send Message</button>
             </div>
@@ -795,3 +807,17 @@
   </div>
 
 </section><!-- /Contact Section -->
+
+@section Scripts
+{
+  <script>
+    // Your custom JavaScript here
+    document.addEventListener("DOMContentLoaded", function () {
+      var scrollToContact = '@(ViewData["ScrollToContact"]?.ToString().ToLower())' === 'true';
+
+      if (scrollToContact) {
+        window.location.hash = '#contact';
+      }
+    });
+  </script>
+}

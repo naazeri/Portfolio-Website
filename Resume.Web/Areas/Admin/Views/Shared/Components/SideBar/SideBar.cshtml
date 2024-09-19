@@ -1,3 +1,4 @@
+@using Resume.DAL.ViewModels.User
 @{
   UserDetailsViewModel user = ViewData["User"] as UserDetailsViewModel ?? new UserDetailsViewModel();
 }
@@ -14,10 +15,10 @@
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+      <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-person"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="user-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a asp-area="Admin" asp-controller="User" asp-action="List">
             <i class="bi bi-circle"></i><span>List</span>
@@ -30,6 +31,19 @@
         </li>
       </ul>
     </li><!-- End User Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#contact-us-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-envelope"></i><span>Contact Us</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="contact-us-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a asp-area="Admin" asp-controller="ContactUs" asp-action="List">
+            <i class="bi bi-circle"></i><span>List</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End ContactUs Nav -->
 
     <li class="nav-heading">Pages</li>
 

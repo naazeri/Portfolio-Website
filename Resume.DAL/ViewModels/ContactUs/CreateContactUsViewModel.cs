@@ -19,9 +19,8 @@ public class CreateContactUsViewModel
   public string FullName { get; set; }
 
   [Display(Name = "Mobile")]
-  [Required(ErrorMessage = "The {0} field is required.")]
   [MaxLength(15, ErrorMessage = "The {0} field must be at most {1} characters long.")]
-  public string Mobile { get; set; }
+  public string? Mobile { get; set; }
 
   [Display(Name = "Email")]
   [Required(ErrorMessage = "The {0} field is required.")]
@@ -31,6 +30,7 @@ public class CreateContactUsViewModel
 
   [Display(Name = "Message")]
   [Required(ErrorMessage = "The {0} field is required.")]
+  [MinLength(10, ErrorMessage = "The {0} field must be at least {1} characters long.")]
   [MaxLength(1000, ErrorMessage = "The {0} field must be at most {1} characters long.")]
   public string Message { get; set; }
 

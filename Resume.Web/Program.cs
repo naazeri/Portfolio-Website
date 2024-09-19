@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers(); // Added to support API controllers
 builder.Services.RegisterService();
 builder.Services.ConfigDB(config);
 builder.Services.ConfigAuth(config);
@@ -33,5 +34,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Map API controllers
+app.MapControllers(); // Added to handle API controllers
 
 app.Run();

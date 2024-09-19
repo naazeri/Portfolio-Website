@@ -1,7 +1,8 @@
-@using Resume.DAL.ViewModels.User
-@model FilterUserViewModel
+@using Resume.Bussines.Extensions
+@using Resume.DAL.ViewModels.ContactUs;
+@model FilterContactUsViewModel
 @{
-  ViewData["Title"] = "User List";
+  ViewData["Title"] = "ContactUs List";
 }
 
 
@@ -14,16 +15,35 @@
           <h5 class="card-title">Search</h5>
           <form class="row g-3">
             <div class="col-auto">
-              <label asp-for="Email" class="form-label"></label>
-              <input asp-for="Email" type="text" class="form-control">
+              <label asp-for="Title" class="form-label"></label>
+              <input asp-for="Title" type="text" class="form-control">
+            </div>
+            <div class="col-auto">
+              <label asp-for="FullName" class="form-label"></label>
+              <input asp-for="FullName" type="text" class="form-control">
             </div>
             <div class="col-auto">
               <label asp-for="Mobile" class="form-label"></label>
               <input asp-for="Mobile" type="tel" class="form-control">
             </div>
+            <div class="col-auto">
+              <label asp-for="Email" class="form-label"></label>
+              <input asp-for="Email" type="text" class="form-control">
+            </div>
+            <div class="col-auto">
+              <label asp-for="AnswerStatus" class="form-label"></label>
+              <select class="form-select" aria-label="Default select example">
+                @foreach (var status in
+                Enum.GetValues<FilterContactUsAnswerStatus>().Cast<FilterContactUsAnswerStatus>().ToList())
+                {
+                  <option value="@status">@status.GetEnumName()</option>
+                }
+              </select>
+            </div>
             <div>
-              <button type="submit" class="btn btn-primary">Search</button>
+              <button type=" submit" class="btn btn-primary">Search</button>
               <button type="reset" class="btn btn-secondary">Reset</button>
+
             </div>
           </form>
         </div>
@@ -31,7 +51,7 @@
 
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Users</h5>
+          <h5 class="card-title">ContactUs</h5>
           @if (Model != null && Model.Entities != null && Model.Entities.Any())
           {
             <!-- Table with stripped rows -->
@@ -39,13 +59,13 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">First Name</th>
-                  <th scope="col">Last Name</th>
-                  <th scope="col">Email</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Full Name</th>
                   <th scope="col">Mobile</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Answer Status</th>
                   <th scope="col" data-type="date" data-format="YYYY/DD/MM">Created Date</th>
                   <th scope="col" data-type="date" data-format="YYYY/DD/MM">Updated Date</th>
-                  <th scope="col">Active</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -54,30 +74,30 @@
                 {
                   <tr>
                     <th scope="row">@entity.Id</th>
-                    <td>@entity.FirstName</td>
-                    <td>@entity.LastName</td>
-                    <td>@entity.Email</td>
+                    <td>@entity.Title</td>
+                    <td>@entity.FullName</td>
                     <td>@entity.Mobile</td>
-                    <td>@entity.CreateDate</td>
-                    <td>@entity.UpdateDate</td>
+                    <td>@entity.Email</td>
                     <td>
-                      @if (entity.IsActive)
+                      @if (entity.Answer == null || entity.Answer == "")
                       {
-                        <span class="badge rounded-pill bg-success">Active</span>
+                        <span class="badge rounded-pill bg-warning">Not Answer</span>
                       }
                       else
                       {
-                        <span class="badge rounded-pill bg-danger">Deactive</span>
+                        <span class="badge rounded-pill bg-success">Answered</span>
                       }
                     </td>
+                    <td>@entity.CreateDate</td>
+                    <td>@entity.UpdateDate</td>
                     <td>
                       <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i
                             class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
                           <li>
-                            <a class="dropdown-item" asp-action="Update" asp-route-id="@entity.Id">
-                              <i class="bi bi-pencil-fill"></i>Edit
+                            <a class="dropdown-item" asp-action="Details" asp-route-id="@entity.Id">
+                              <i class="bi bi-eye-fill"></i>Details
                             </a>
                           </li>
                         </ul>

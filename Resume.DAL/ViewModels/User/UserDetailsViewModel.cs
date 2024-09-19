@@ -1,13 +1,12 @@
+using Resume.DAL.ViewModels.Common;
+
 namespace Resume.DAL.ViewModels.User;
 
-public class UserDetailsViewModel
+public class UserDetailsViewModel : BaseDetailsViewModel<int>
 {
-  public int Id { get; set; }
   public string FirstName { get; set; }
   public string LastName { get; set; }
   public string Mobile { get; set; }
   public string Email { get; set; }
   public bool IsActive { get; set; }
-  public DateTime CreateDate { get; set; }
-  public DateTime UpdateDate { get; set; }
 }

@@ -8,7 +8,6 @@ namespace Resume.DAL.Repositories.Implementations;
 
 public class UserRepository(AppDbContext context) : IUserRepository
 {
-  #region Methods
   public async Task<FilterUserViewModel> GetAllAsync(FilterUserViewModel filter)
   {
     var query = context.Users.OrderByDescending(x => x.CreateDate)
@@ -44,6 +43,7 @@ public class UserRepository(AppDbContext context) : IUserRepository
 
     return filter;
   }
+
   public async Task<User?> GetByIdAsync(int id)
   {
     return await context.Users
@@ -82,6 +82,4 @@ public class UserRepository(AppDbContext context) : IUserRepository
   {
     await context.SaveChangesAsync();
   }
-
-  #endregion
 }
