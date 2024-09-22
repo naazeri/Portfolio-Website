@@ -13,7 +13,7 @@
     <form class="row g-3" asp-action="Create" method="post">
       <div class="col-12">
         <label asp-for="Title" class="form-label"></label>
-        <input asp-for="Title" type="text" class="form-control" readonly>
+        <input asp-for="Title" type="text" class="form-control" disabled>
         <span asp-validation-for="Title" class="text-danger"></span>
       </div>
       <div class="col-12">
@@ -23,17 +23,17 @@
       </div>
       <div class="col-12">
         <label asp-for="Mobile" class="form-label"></label>
-        <input asp-for="Mobile" type="tel" class="form-control">
+        <input asp-for="Mobile" type="tel" class="form-control" disabled>
         <span asp-validation-for="Mobile" class="text-danger"></span>
       </div>
       <div class="col-12">
         <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" type="email" class="form-control">
+        <input asp-for="Email" type="email" class="form-control" disabled>
         <span asp-validation-for="Email" class="text-danger"></span>
       </div>
       <div class="col-12">
         <label asp-for="Message" class="form-label"></label>
-        <textarea asp-for="Message" class="form-control">@Model.Message</textarea>
+        <textarea asp-for="Message" class="form-control" disabled>@Model.Message</textarea>
         <span asp-validation-for="Message" class="text-danger"></span>
       </div>
       <div class="col-12">
