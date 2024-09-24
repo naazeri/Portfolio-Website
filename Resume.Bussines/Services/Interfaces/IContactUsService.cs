@@ -1,4 +1,5 @@
-﻿using Resume.DAL.ViewModels.ContactUs;
+﻿using Resume.DAL.Models;
+using Resume.DAL.ViewModels.ContactUs;
 
 namespace Resume.Bussines.Services.Interfaces;
 
@@ -8,7 +9,8 @@ public interface IContactUsService
 
   Task<CreateContactUsResult> AddAsync(CreateContactUsViewModel viewModel);
   Task<FilterContactUsViewModel> GetAllAsync(FilterContactUsViewModel viewModel);
-  Task<ContactUsDetailsViewModel?> GetByIdAsync(int id);
+  Task<ContactUs?> GetByIdAsync(int id);
+  Task<ContactUsDetailsViewModel?> GetInfoByIdAsync(int id);
   Task<AnswerResult> AnswerAsync(ContactUsDetailsViewModel model);
 
   #endregion

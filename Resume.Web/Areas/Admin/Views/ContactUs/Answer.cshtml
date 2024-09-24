@@ -10,7 +10,7 @@
   <div class="card-body">
     <h5 class="card-title">Create User</h5>
 
-    <form class="row g-3" asp-action="Create" method="post">
+    <form class="row g-3" asp-action="Answer" method="post">
       <div class="col-12">
         <label asp-for="Title" class="form-label"></label>
         <input asp-for="Title" type="text" class="form-control" disabled>
@@ -33,12 +33,12 @@
       </div>
       <div class="col-12">
         <label asp-for="Message" class="form-label"></label>
-        <textarea asp-for="Message" class="form-control" disabled>@Model.Message</textarea>
+        <textarea asp-for="Message" class="form-control" rows="10" disabled>@Model.Message</textarea>
         <span asp-validation-for="Message" class="text-danger"></span>
       </div>
       <div class="col-12">
         <label asp-for="Answer" class="form-label"></label>
-        <textarea asp-for="Answer" class="form-control">@Model.Answer</textarea>
+        <textarea asp-for="Answer" class="form-control" rows="10">@Model.Answer</textarea>
         <span asp-validation-for="Answer" class="text-danger"></span>
       </div>
       @if (string.IsNullOrEmpty(Model.Answer))

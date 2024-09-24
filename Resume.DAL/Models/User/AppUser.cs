@@ -1,8 +1,8 @@
-﻿using Resume.DAL.Models.Common;
+using Resume.DAL.Models.Common;
 
-namespace Resume.DAL.Models;
+namespace Resume.DAL.Models.User;
 
-public class User : BaseEntity<int>
+public class AppUser : BaseEntity<int>
 {
   #region Properties
   public string FirstName { get; set; }

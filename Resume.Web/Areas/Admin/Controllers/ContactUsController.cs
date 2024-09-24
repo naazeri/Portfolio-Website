@@ -17,9 +17,9 @@ public class ContactUsController(IContactUsService contactUsService) : AdminBase
 
   #region Details
 
-  public async Task<IActionResult> Details(int id)
+  public async Task<IActionResult> Answer(int id)
   {
-    var contactUs = await contactUsService.GetByIdAsync(id);
+    var contactUs = await contactUsService.GetInfoByIdAsync(id);
 
     if (contactUs == null)
     {
@@ -30,7 +30,7 @@ public class ContactUsController(IContactUsService contactUsService) : AdminBase
   }
 
   [HttpPost]
-  public async Task<IActionResult> Details(ContactUsDetailsViewModel model)
+  public async Task<IActionResult> Answer(ContactUsDetailsViewModel model)
   {
     #region Validations
 
@@ -41,22 +41,22 @@ public class ContactUsController(IContactUsService contactUsService) : AdminBase
 
     #endregion
 
-    // var result = await contactUsService.AnswerAsync(model);
-    // switch (result)
-    // {
-    //   case AnswerResult.Success:
-    //     TempData[SuccessMessage] = "پاسخ برای این تماس با ما ارسال شد.";
-    //     return RedirectToAction("List");
+    var result = await contactUsService.AnswerAsync(model);
+    switch (result)
+    {
+      case AnswerResult.Success:
+        TempData[SuccessMessage] = "Answer sent successfully.";
+        return RedirectToAction("List");
 
-    //   case AnswerResult.ContactUsNotFound:
-    //     TempData[ErrorMessage] = "تماس با ما پیدا نشد.";
-    //     break;
+      case AnswerResult.ContactUsNotFound:
+        TempData[ErrorMessage] = "ContactUs not found.";
+        break;
 
-    //   case AnswerResult.AnswerIsNull:
-    //     TempData[ErrorMessage] = "متن پاسخ خالی است.";
-    //     break;
+      case AnswerResult.AnswerIsNull:
+        TempData[ErrorMessage] = "Answer text is required.";
+        break;
 
-    // }
+    }
 
     return View(model);
   }

@@ -77,33 +77,16 @@ public class ContactUsRepository(AppDbContext context) : IContactUsRepository
     return filter;
   }
 
-  public async Task<ContactUsDetailsViewModel?> GetInfoByIdAsync(int id)
+
+  public async Task<ContactUs?> GetByIdAsync(int id)
   {
     return await context.ContactUs
-        .Select(contactUs => new ContactUsDetailsViewModel()
-        {
-          Id = contactUs.Id,
-          Title = contactUs.Title,
-          FullName = contactUs.FullName,
-          Mobile = contactUs.Mobile,
-          Email = contactUs.Email,
-          Message = contactUs.Message,
-          Answer = contactUs.Answer,
-          CreateDate = contactUs.CreateDate,
-          UpdateDate = contactUs.UpdateDate,
-        })
         .FirstOrDefaultAsync(contactUs => contactUs.Id == id);
   }
 
   public async Task AddAsync(ContactUs model)
   {
     await context.ContactUs.AddAsync(model);
-  }
-
-  public async Task<ContactUs?> GetByIdAsync(int id)
-  {
-    return await context.ContactUs
-        .FirstOrDefaultAsync(contactUs => contactUs.Id == id);
   }
 
   public void Update(ContactUs contactUs)

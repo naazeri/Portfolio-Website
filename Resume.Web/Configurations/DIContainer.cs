@@ -15,11 +15,16 @@ public static class DIContainer
     #region Repositories
     services.AddScoped<IUserRepository, UserRepository>();
     services.AddScoped<IContactUsRepository, ContactUsRepository>();
+    services.AddScoped<IAboutRepository, AboutRepository>();
     #endregion
 
     #region Services
     services.AddScoped<IUserService, UserService>();
     services.AddScoped<IContactUsService, ContactUsService>();
+    services.AddScoped<IAboutService, AboutService>();
+    services.AddScoped<IViewRenderService, ViewRenderService>();
+    services.AddScoped<IEmailService, EmailService>();
+    services.AddScoped<IImageService, ImageService>();
     #endregion
   }
 

@@ -1,30 +1,30 @@
 using Resume.Bussines.Security;
 using Resume.Bussines.Services.Interfaces;
-using Resume.DAL.Models;
+using Resume.DAL.Models.User;
 using Resume.DAL.Repositories.Interfaces;
 using Resume.DAL.ViewModels.Account;
 using Resume.DAL.ViewModels.User;
 
 namespace Resume.Bussines.Services.Implementations;
 
-public class UserService(IUserRepository userRepository) : IUserService
+public class UserService(IUserRepository repository) : IUserService
 {
 
   #region Methods
   public async Task<FilterUserViewModel> GetAllAsync(FilterUserViewModel filter)
   {
-    return await userRepository.GetAllAsync(filter);
+    return await repository.GetAllAsync(filter);
   }
 
-  public async Task<User?> GetByEmailAsync(string email)
+  public async Task<AppUser?> GetByEmailAsync(string email)
   {
     email = email.Trim().ToLower();
-    return await userRepository.GetByEmailAsync(email);
+    return await repository.GetByEmailAsync(email);
   }
 
   public async Task<CreateUserResult> AddAsync(CreateUserViewModel model)
   {
-    var user = new User()
+    var user = new AppUser()
     {
       FirstName = model.FirstName,
       LastName = model.LastName,
@@ -34,15 +34,15 @@ public class UserService(IUserRepository userRepository) : IUserService
       IsActive = model.IsActive,
     };
 
-    await userRepository.AddAsync(user);
-    await userRepository.SaveChangesAsync();
+    await repository.AddAsync(user);
+    await repository.SaveChangesAsync();
 
     return CreateUserResult.Success;
   }
 
   public async Task<EditUserViewModel?> GetForEditByIdAsync(int id)
   {
-    var user = await userRepository.GetByIdAsync(id);
+    var user = await repository.GetByIdAsync(id);
     if (user == null)
     {
       return null;
@@ -61,7 +61,7 @@ public class UserService(IUserRepository userRepository) : IUserService
 
   public async Task<UserDetailsViewModel?> GetForDetailsByIdAsync(int id)
   {
-    var user = await userRepository.GetByIdAsync(id);
+    var user = await repository.GetByIdAsync(id);
     if (user == null)
     {
       return null;
@@ -82,7 +82,7 @@ public class UserService(IUserRepository userRepository) : IUserService
 
   public async Task<EditUserResult> UpdateAsync(EditUserViewModel model)
   {
-    var user = await userRepository.GetByIdAsync(model.Id);
+    var user = await repository.GetByIdAsync(model.Id);
 
     if (user == null)
     {
@@ -91,12 +91,12 @@ public class UserService(IUserRepository userRepository) : IUserService
 
     model.Email = model.Email.Trim().ToLower();
 
-    if (await userRepository.IsEmailExistsAsync(model.Id, model.Email))
+    if (await repository.IsEmailExistsAsync(model.Id, model.Email))
     {
       return EditUserResult.EmailAlreadyExists;
     }
 
-    if (await userRepository.IsMobileExistsAsync(model.Id, model.Mobile))
+    if (await repository.IsMobileExistsAsync(model.Id, model.Mobile))
     {
       return EditUserResult.MobileAlreadyExists;
     }
@@ -107,8 +107,8 @@ public class UserService(IUserRepository userRepository) : IUserService
     user.Email = model.Email;
     user.IsActive = model.IsActive;
 
-    userRepository.Update(user);
-    await userRepository.SaveChangesAsync();
+    repository.Update(user);
+    await repository.SaveChangesAsync();
 
     return EditUserResult.Success;
   }
@@ -116,7 +116,7 @@ public class UserService(IUserRepository userRepository) : IUserService
   public async Task<LoginResult> LoginAsync(LoginViewModel model)
   {
     model.Email = model.Email.Trim().ToLower();
-    var user = await userRepository.GetByEmailAsync(model.Email);
+    var user = await repository.GetByEmailAsync(model.Email);
 
     if (user == null)
     {

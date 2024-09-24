@@ -7,7 +7,6 @@ public static class DateExtensions
   public static string ToShamsi(this DateTime date)
   {
     PersianCalendar pc = new();
-
     int year = pc.GetYear(date);
     int month = pc.GetMonth(date);
     int day = pc.GetDayOfMonth(date);

@@ -4,11 +4,11 @@ namespace Resume.DAL.Models;
 
 public class ContactUs : BaseEntity<int>
 {
-  public string Title { get; set; }
-  public string FullName { get; set; }
+  public required string Title { get; set; }
+  public required string FullName { get; set; }
   public string? Mobile { get; set; }
-  public string Email { get; set; }
-  public string Message { get; set; }
+  public required string Email { get; set; }
+  public required string Message { get; set; }
   public string? Answer { get; set; }
 
 }

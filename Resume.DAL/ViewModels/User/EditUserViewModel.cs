@@ -31,6 +31,7 @@ public class EditUserViewModel
   [Display(Name = "Email")]
   [Required(ErrorMessage = "The {0} field is required.")]
   [MaxLength(350, ErrorMessage = "The {0} field must be at most {1} characters long.")]
+  [EmailAddress(ErrorMessage = "Email format is not valid.")]
   public string Email { get; set; }
 
   [Display(Name = "Is Active?")]

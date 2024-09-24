@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Resume.DAL.Context;
-using Resume.DAL.Models;
+using Resume.DAL.Models.User;
 using Resume.DAL.Repositories.Interfaces;
 using Resume.DAL.ViewModels.User;
 
@@ -44,24 +44,24 @@ public class UserRepository(AppDbContext context) : IUserRepository
     return filter;
   }
 
-  public async Task<User?> GetByIdAsync(int id)
+  public async Task<AppUser?> GetByIdAsync(int id)
   {
     return await context.Users
       .FirstOrDefaultAsync(x => x.Id == id);
   }
 
-  public async Task<User?> GetByEmailAsync(string email)
+  public async Task<AppUser?> GetByEmailAsync(string email)
   {
     return await context.Users
       .FirstOrDefaultAsync(x => x.Email == email);
   }
 
-  public async Task AddAsync(User model)
+  public async Task AddAsync(AppUser model)
   {
     await context.Users.AddAsync(model);
   }
 
-  public void Update(User model)
+  public void Update(AppUser model)
   {
     context.Users.Update(model);
   }

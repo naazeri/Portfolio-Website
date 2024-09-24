@@ -6,9 +6,9 @@ using Resume.DAL.ViewModels.ContactUs;
 namespace Resume.Bussines.Services.Implementations;
 
 public class ContactUsService(
-  IContactUsRepository contactUsRepository
-  // IViewRenderService viewRenderService,
-  // IEmailService emailService
+  IContactUsRepository repository,
+  IViewRenderService viewRenderService,
+  IEmailService emailService
   ) : IContactUsService
 {
 
@@ -16,7 +16,34 @@ public class ContactUsService(
 
   public async Task<FilterContactUsViewModel> GetAllAsync(FilterContactUsViewModel filter)
   {
-    return await contactUsRepository.GetAllAsync(filter);
+    return await repository.GetAllAsync(filter);
+  }
+
+  public async Task<ContactUs?> GetByIdAsync(int id)
+  {
+    return await repository.GetByIdAsync(id);
+  }
+
+  public async Task<ContactUsDetailsViewModel?> GetInfoByIdAsync(int id)
+  {
+    var contactUs = await repository.GetByIdAsync(id);
+    if (contactUs == null)
+    {
+      return null;
+    }
+
+    return new ContactUsDetailsViewModel
+    {
+      Id = contactUs.Id,
+      Title = contactUs.Title,
+      FullName = contactUs.FullName,
+      Mobile = contactUs.Mobile,
+      Email = contactUs.Email,
+      Message = contactUs.Message,
+      Answer = contactUs.Answer,
+      CreateDate = contactUs.CreateDate,
+      UpdateDate = contactUs.UpdateDate
+    };
   }
 
   public async Task<CreateContactUsResult> AddAsync(CreateContactUsViewModel viewModel)
@@ -31,35 +58,34 @@ public class ContactUsService(
       Answer = null,
     };
 
-    await contactUsRepository.AddAsync(model);
-    await contactUsRepository.SaveChangesAsync();
+    await repository.AddAsync(model);
+    await repository.SaveChangesAsync();
 
     return CreateContactUsResult.Success;
   }
 
-  public async Task<ContactUsDetailsViewModel?> GetByIdAsync(int id)
-  {
-    return await contactUsRepository.GetInfoByIdAsync(id);
-  }
-
   public async Task<AnswerResult> AnswerAsync(ContactUsDetailsViewModel model)
   {
-    var contactUs = await contactUsRepository.GetByIdAsync(model.Id);
+    var contactUs = await repository.GetByIdAsync(model.Id);
 
     if (contactUs == null)
+    {
       return AnswerResult.ContactUsNotFound;
+    }
 
     if (string.IsNullOrEmpty(model.Answer))
+    {
       return AnswerResult.AnswerIsNull;
+    }
 
     contactUs.Answer = model.Answer;
 
-    contactUsRepository.Update(contactUs);
-    await contactUsRepository.SaveChangesAsync();
+    repository.Update(contactUs);
+    await repository.SaveChangesAsync();
 
     #region Send Email
     // string body = await viewRenderService.RenderToStringAsync("Emails/AnswerContactUs", model);
-    // await emailService.SendEmail(contactUs.Email, "پاسخ به تماس با ما", body);
+    // emailService.SendEmail(contactUs.Email, "پاسخ به تماس با ما", body);
     #endregion
 
     return AnswerResult.Success;

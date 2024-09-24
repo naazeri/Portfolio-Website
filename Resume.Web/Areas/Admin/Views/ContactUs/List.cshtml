@@ -89,15 +89,15 @@
                       }
                     </td>
                     <td>@entity.CreateDate</td>
-                    <td>@entity.UpdateDate</td>
+                    <td>@entity.UpdateDate.ToShamsi()</td>
                     <td>
                       <div class="filter">
                         <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i
                             class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
                           <li>
-                            <a class="dropdown-item" asp-action="Details" asp-route-id="@entity.Id">
-                              <i class="bi bi-eye-fill"></i>Details
+                            <a class="dropdown-item" asp-action="Answer" asp-route-id="@entity.Id">
+                              <i class="bi bi-pencil"></i>Answer/Details
                             </a>
                           </li>
                         </ul>
@@ -114,7 +114,7 @@
           }
           else
           {
-            <partial name="_AdminNotFound" />
+            <partial name="_AdminNotExist" />
           }
 
         </div>
