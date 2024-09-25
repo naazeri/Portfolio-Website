@@ -9,7 +9,7 @@ public class AboutController(IAboutService aboutService) : AdminBaseController
   #region Update
   public async Task<IActionResult> Update()
   {
-    var model = await aboutService.GetDetailsAsync();
+    var model = await aboutService.GetDetailsForAdminAsync();
     return View(model);
   }
 

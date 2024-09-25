@@ -1,0 +1,21 @@
+@using Resume.DAL.ViewModels.AboutMe
+@model List<SocialLinkDetailsViewModel>
+
+@if (Model != null)
+{
+  @foreach (var item in Model)
+  {
+    if (item.IsActive)
+    {
+      <a href="@item.LinkAddress" target="_blank" title="@item.Title"><i class="bi @item.IconName"></i></a>
+    }
+  }
+}
+else
+{
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Error, Check data!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+}

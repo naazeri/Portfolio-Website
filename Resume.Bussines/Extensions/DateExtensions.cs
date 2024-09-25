@@ -13,4 +13,15 @@ public static class DateExtensions
 
     return $"{year}/{month.ToString("00")}/{day.ToString("00")}";
   }
+
+  public static string ToShamsi(this DateOnly date)
+  {
+    PersianCalendar pc = new();
+    DateTime dateTime = date.ToDateTime(new TimeOnly());
+    int year = pc.GetYear(dateTime);
+    int month = pc.GetMonth(dateTime);
+    int day = pc.GetDayOfMonth(dateTime);
+
+    return $"{year}/{month.ToString("00")}/{day.ToString("00")}";
+  }
 }

@@ -159,7 +159,12 @@ namespace Resume.Web.Migrations
             migrationBuilder.InsertData(
                 table: "About",
                 columns: new[] { "Id", "BirthDate", "CreateDate", "CurrentJobTitle", "CurrentJobTitleDescriptionBottom", "CurrentJobTitleDescriptionTop", "Email", "FirstName", "LastName", "Location", "Mobile", "MyTitles", "Summary", "UpdateDate" },
-                values: new object[] { 1, new DateOnly(1995, 1, 25), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "UI/UX Designer & Web Developer", "Therefore, choosing the services of labor and pains is the choice of the services. Anyone can get everything and that. There are no complaints from the prosecutors about their services at the time. And all his Because of desire, as said, most offices indeed. But those who are not to be repulsed will therefore be pursued.", "It is important to take care of the patient, to be followed by the doctor, but it is a time of great pain and suffering.", "admin@gmail.com", "John", "Doe", "Orlando, FL, USA", "09123456789", "Developer, Teacher, Designer", "It takes great pains to benefit. His needs result from something that actually drives him away. Let them be what they want. Anyone whom anyone desires. And no one who hinders receives the others. Because he should flee in this office of convenience, which is here.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, new DateOnly(1996, 4, 10), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Software Engineer at <a href=\"https://dotin.ir\" target=\"_blank\" style=\"color:green;\">Dotin</a>", "Therefore, choosing the services of labor and pains is the choice of the services. Anyone can get everything and that. There are no complaints from the prosecutors about their services at the time. And all his Because of desire, as said, most offices indeed. But those who are not to be repulsed will therefore be pursued.", "It is important to take care of the patient, to be followed by the doctor, but it is a time of great pain and suffering.", "reza.armani75@gmail.com", "Reza", "Nazeri", "Mashhad, Iran", "+989123456789", "Developer, Teacher", "It takes great pains to benefit. His needs result from something that actually drives him away. Let them be what they want. Anyone whom anyone desires. And no one who hinders receives the others. Because he should flee in this office of convenience, which is here.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "ContactUs",
+                columns: new[] { "Id", "Answer", "CreateDate", "Email", "FullName", "Message", "Mobile", "Title", "UpdateDate" },
+                values: new object[] { 1, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "reza.armani75@gmail.com", "Reza Nazeri", "hi\nhow are you doin?", null, "Test 1", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "SiteConfigs",
@@ -174,15 +179,18 @@ namespace Resume.Web.Migrations
             migrationBuilder.InsertData(
                 table: "ImageFiles",
                 columns: new[] { "Id", "AboutId", "Alt", "CreateDate", "IsDeleted", "LargeImage", "MaxImage", "ThumbnailImage", "UpdateDate" },
-                values: new object[] { 1, 1, "profile image", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "/Site/assets/img/profile-img.jpg", "/Site/assets/img/profile-img.jpg", "/Site/assets/img/profile-img.jpg", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, 1, "profile image", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, "/images/me.webp", "/images/me.webp", "/images/me.webp", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "SocialLinks",
                 columns: new[] { "Id", "AboutId", "CreateDate", "IconName", "IsActive", "LinkAddress", "Title", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "fa-linkedin", true, "https://linkedin.com", "Linkedin", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "fa-instagram", true, "https://instagram.com", "Instagram", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "bi-linkedin", true, "https://linkedin.com/in/rezanazeri", "Linkedin", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "bi-youtube", true, "https://youtube.com/@naazeri", "Youtube", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "bi-github", true, "https://github.com/naazeri", "Github", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "bi-twitter-x", true, "https://x.com/r_nazeri", "X", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "bi-instagram", true, "https://instagram.com/re_nazeri", "Instagram", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.CreateIndex(

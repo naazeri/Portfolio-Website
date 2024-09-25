@@ -12,7 +12,7 @@ using Resume.DAL.Context;
 namespace Resume.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240924204504_AddModels")]
+    [Migration("20240925011947_AddModels")]
     partial class AddModels
     {
         /// <inheritdoc />
@@ -146,6 +146,18 @@ namespace Resume.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactUs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "reza.armani75@gmail.com",
+                            FullName = "Reza Nazeri",
+                            Message = "hi\nhow are you doin?",
+                            Title = "Test 1",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Resume.DAL.Models.File.ImageFile", b =>
@@ -198,9 +210,9 @@ namespace Resume.Web.Migrations
                             Alt = "profile image",
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
-                            LargeImage = "/Site/assets/img/profile-img.jpg",
-                            MaxImage = "/Site/assets/img/profile-img.jpg",
-                            ThumbnailImage = "/Site/assets/img/profile-img.jpg",
+                            LargeImage = "/images/me.webp",
+                            MaxImage = "/images/me.webp",
+                            ThumbnailImage = "/images/me.webp",
                             UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -260,17 +272,17 @@ namespace Resume.Web.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateOnly(1995, 1, 25),
+                            BirthDate = new DateOnly(1996, 4, 10),
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CurrentJobTitle = "UI/UX Designer & Web Developer",
+                            CurrentJobTitle = "Software Engineer at <a href=\"https://dotin.ir\" target=\"_blank\" style=\"color:green;\">Dotin</a>",
                             CurrentJobTitleDescriptionBottom = "Therefore, choosing the services of labor and pains is the choice of the services. Anyone can get everything and that. There are no complaints from the prosecutors about their services at the time. And all his Because of desire, as said, most offices indeed. But those who are not to be repulsed will therefore be pursued.",
                             CurrentJobTitleDescriptionTop = "It is important to take care of the patient, to be followed by the doctor, but it is a time of great pain and suffering.",
-                            Email = "admin@gmail.com",
-                            FirstName = "John",
-                            LastName = "Doe",
-                            Location = "Orlando, FL, USA",
-                            Mobile = "09123456789",
-                            MyTitles = "Developer, Teacher, Designer",
+                            Email = "reza.armani75@gmail.com",
+                            FirstName = "Reza",
+                            LastName = "Nazeri",
+                            Location = "Mashhad, Iran",
+                            Mobile = "+989123456789",
+                            MyTitles = "Developer, Teacher",
                             Summary = "It takes great pains to benefit. His needs result from something that actually drives him away. Let them be what they want. Anyone whom anyone desires. And no one who hinders receives the others. Because he should flee in this office of convenience, which is here.",
                             UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -375,9 +387,9 @@ namespace Resume.Web.Migrations
                             Id = 1,
                             AboutId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IconName = "fa-linkedin",
+                            IconName = "bi-linkedin",
                             IsActive = true,
-                            LinkAddress = "https://linkedin.com",
+                            LinkAddress = "https://linkedin.com/in/rezanazeri",
                             Title = "Linkedin",
                             UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -386,9 +398,42 @@ namespace Resume.Web.Migrations
                             Id = 2,
                             AboutId = 1,
                             CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IconName = "fa-instagram",
+                            IconName = "bi-youtube",
                             IsActive = true,
-                            LinkAddress = "https://instagram.com",
+                            LinkAddress = "https://youtube.com/@naazeri",
+                            Title = "Youtube",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AboutId = 1,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IconName = "bi-github",
+                            IsActive = true,
+                            LinkAddress = "https://github.com/naazeri",
+                            Title = "Github",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AboutId = 1,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IconName = "bi-twitter-x",
+                            IsActive = true,
+                            LinkAddress = "https://x.com/r_nazeri",
+                            Title = "X",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AboutId = 1,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IconName = "bi-instagram",
+                            IsActive = true,
+                            LinkAddress = "https://instagram.com/re_nazeri",
                             Title = "Instagram",
                             UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });

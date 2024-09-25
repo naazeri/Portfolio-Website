@@ -12,7 +12,7 @@ public class AboutService(
   ILogger<AboutService> logger) : IAboutService
 {
 
-  public async Task<AdminSideEditAboutViewModel?> GetDetailsAsync()
+  public async Task<AdminSideEditAboutViewModel?> GetDetailsForAdminAsync()
   {
     var model = await repository.GetDetailsAsync();
 
@@ -40,6 +40,67 @@ public class AboutService(
       CreateDate = model.CreateDate,
       UpdateDate = model.UpdateDate,
     };
+  }
+
+  public async Task<SiteSideEditAboutViewModel?> GetDetailsForSiteAsync()
+  {
+    var model = await repository.GetDetailsAsync();
+
+    if (model == null)
+    {
+      return null;
+    }
+
+    return new SiteSideEditAboutViewModel
+    {
+      Id = model.Id,
+      FirstName = model.FirstName,
+      LastName = model.LastName,
+      MyTitles = model.MyTitles,
+      SocialLinks = model.SocialLinks,
+      AboutImage = model.AboutImage,
+      Summary = model.Summary,
+      CurrentJobTitle = model.CurrentJobTitle,
+      CurrentJobTitleDescriptionTop = model.CurrentJobTitleDescriptionTop,
+      CurrentJobTitleDescriptionBottom = model.CurrentJobTitleDescriptionBottom,
+      Mobile = model.Mobile,
+      Email = model.Email,
+      BirthDate = model.BirthDate,
+      Location = model.Location,
+      CreateDate = model.CreateDate,
+      UpdateDate = model.UpdateDate,
+    };
+  }
+
+  public async Task<List<SocialLinkDetailsViewModel>> GetSocialLinksAsync()
+  {
+    var model = await repository.GetSocialLinksAsync();
+
+    if (model == null || model.Count == 0)
+    {
+      return [];
+    }
+
+    List<SocialLinkDetailsViewModel> result = MapSocialLinksToViewModel(model);
+    return result;
+  }
+
+  public List<SocialLinkDetailsViewModel> MapSocialLinksToViewModel(List<SocialLink> socialLinks)
+  {
+    List<SocialLinkDetailsViewModel> result = new(socialLinks.Count);
+    foreach (var item in socialLinks)
+    {
+      result.Add(new()
+      {
+        Id = item.Id,
+        Title = item.Title,
+        LinkAddress = item.LinkAddress,
+        IconName = item.IconName,
+        IsActive = item.IsActive,
+      });
+    }
+
+    return result;
   }
 
   public async Task<AdminSideEditAboutResult> UpdateAsync(AdminSideEditAboutViewModel model)
