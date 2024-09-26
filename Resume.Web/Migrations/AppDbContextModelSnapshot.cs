@@ -86,7 +86,7 @@ namespace Resume.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6064),
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8953),
                             ShowAboutSection = true,
                             ShowContactSection = true,
                             ShowFooter1Section = true,
@@ -100,7 +100,7 @@ namespace Resume.Web.Migrations
                             SiteIcon = "/Site/assets/img/favicon.png",
                             SiteTitle = "John Doe Resume",
                             Tagline = "My Portfolio",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6065)
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8953)
                         });
                 });
 
@@ -145,12 +145,12 @@ namespace Resume.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6159),
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9100),
                             Email = "reza.armani75@gmail.com",
                             FullName = "Reza Nazeri",
                             Message = "hi\nhow are you doin?",
                             Title = "Test 1",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6159)
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9100)
                         });
                 });
 
@@ -162,16 +162,13 @@ namespace Resume.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AboutId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Alt")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsInTrash")
                         .HasColumnType("bit");
 
                     b.Property<string>("LargeImage")
@@ -179,6 +176,10 @@ namespace Resume.Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MaxImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MediumImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -191,23 +192,20 @@ namespace Resume.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AboutId")
-                        .IsUnique();
-
                     b.ToTable("ImageFiles");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            AboutId = 1,
                             Alt = "profile image",
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6137),
-                            IsDeleted = false,
-                            LargeImage = "/images/me.webp",
-                            MaxImage = "/images/me.webp",
-                            ThumbnailImage = "/images/me.webp",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6137)
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8970),
+                            IsInTrash = false,
+                            LargeImage = "/Site/assets/img/profile-img.jpg",
+                            MaxImage = "/Site/assets/img/profile-img.jpg",
+                            MediumImage = "/Site/assets/img/profile-img.jpg",
+                            ThumbnailImage = "/Site/assets/img/profile-img.jpg",
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8970)
                         });
                 });
 
@@ -240,6 +238,9 @@ namespace Resume.Web.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ImageFileId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -260,6 +261,8 @@ namespace Resume.Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ImageFileId");
+
                     b.ToTable("About");
 
                     b.HasData(
@@ -267,18 +270,19 @@ namespace Resume.Web.Migrations
                         {
                             Id = 1,
                             BirthDate = new DateOnly(1996, 4, 10),
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6095),
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9003),
                             CurrentJobTitle = "Software Engineer at <a href=\"https://dotin.ir\" target=\"_blank\" style=\"color:green;\">Dotin</a>",
                             CurrentJobTitleDescriptionBottom = "Therefore, choosing the services of labor and pains is the choice of the services. Anyone can get everything and that. There are no complaints from the prosecutors about their services at the time. And all his Because of desire, as said, most offices indeed. But those who are not to be repulsed will therefore be pursued.",
                             CurrentJobTitleDescriptionTop = "It is important to take care of the patient, to be followed by the doctor, but it is a time of great pain and suffering.",
                             Email = "reza.armani75@gmail.com",
                             FirstName = "Reza",
+                            ImageFileId = 1,
                             LastName = "Nazeri",
                             Location = "Mashhad, Iran",
                             Mobile = "+989123456789",
                             MyTitles = "Developer, Teacher",
                             Summary = "It takes great pains to benefit. His needs result from something that actually drives him away. Let them be what they want. Anyone whom anyone desires. And no one who hinders receives the others. Because he should flee in this office of convenience, which is here.",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6096)
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9003)
                         });
                 });
 
@@ -327,14 +331,14 @@ namespace Resume.Web.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(5914),
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8795),
                             Email = "admin@gmail.com",
                             FirstName = "Admin",
                             IsActive = true,
                             LastName = "Admin",
                             Mobile = "+989123456789",
                             Password = "E1-0A-DC-39-49-BA-59-AB-BE-56-E0-57-F2-0F-88-3E",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(5929)
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8805)
                         });
                 });
 
@@ -380,68 +384,68 @@ namespace Resume.Web.Migrations
                         {
                             Id = 1,
                             AboutId = 1,
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6111),
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9070),
                             IconName = "bi-linkedin",
                             IsActive = true,
                             LinkAddress = "https://linkedin.com/in/rezanazeri",
                             Title = "Linkedin",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6112)
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9071)
                         },
                         new
                         {
                             Id = 2,
                             AboutId = 1,
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6113),
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9072),
                             IconName = "bi-youtube",
                             IsActive = true,
                             LinkAddress = "https://youtube.com/@naazeri",
                             Title = "Youtube",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6114)
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9073)
                         },
                         new
                         {
                             Id = 3,
                             AboutId = 1,
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6115),
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9074),
                             IconName = "bi-github",
                             IsActive = true,
                             LinkAddress = "https://github.com/naazeri",
                             Title = "Github",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6115)
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9075)
                         },
                         new
                         {
                             Id = 4,
                             AboutId = 1,
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6117),
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9076),
                             IconName = "bi-twitter-x",
                             IsActive = true,
                             LinkAddress = "https://x.com/r_nazeri",
                             Title = "X",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6117)
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9076)
                         },
                         new
                         {
                             Id = 5,
                             AboutId = 1,
-                            CreateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6118),
+                            CreateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9078),
                             IconName = "bi-instagram",
                             IsActive = true,
                             LinkAddress = "https://instagram.com/re_nazeri",
                             Title = "Instagram",
-                            UpdateDate = new DateTime(2024, 9, 26, 6, 56, 43, 930, DateTimeKind.Local).AddTicks(6119)
+                            UpdateDate = new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9078)
                         });
                 });
 
-            modelBuilder.Entity("Resume.DAL.Models.File.ImageFile", b =>
+            modelBuilder.Entity("Resume.DAL.Models.User.About", b =>
                 {
-                    b.HasOne("Resume.DAL.Models.User.About", "About")
-                        .WithOne("AboutImage")
-                        .HasForeignKey("Resume.DAL.Models.File.ImageFile", "AboutId")
+                    b.HasOne("Resume.DAL.Models.File.ImageFile", "AboutImage")
+                        .WithMany()
+                        .HasForeignKey("ImageFileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("About");
+                    b.Navigation("AboutImage");
                 });
 
             modelBuilder.Entity("Resume.DAL.Models.User.SocialLink", b =>
@@ -457,8 +461,6 @@ namespace Resume.Web.Migrations
 
             modelBuilder.Entity("Resume.DAL.Models.User.About", b =>
                 {
-                    b.Navigation("AboutImage");
-
                     b.Navigation("SocialLinks");
                 });
 #pragma warning restore 612, 618

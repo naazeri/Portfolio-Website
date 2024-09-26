@@ -21,14 +21,14 @@ public class AboutService(
       return null;
     }
 
-    return new AdminSideEditAboutViewModel
+    return new()
     {
       Id = model.Id,
       FirstName = model.FirstName,
       LastName = model.LastName,
       MyTitles = model.MyTitles,
       SocialLinks = model.SocialLinks,
-      AboutImagePreview = model.AboutImage?.ThumbnailImage,
+      AboutImage = model.AboutImage,
       Summary = model.Summary,
       CurrentJobTitle = model.CurrentJobTitle,
       CurrentJobTitleDescriptionTop = model.CurrentJobTitleDescriptionTop,
@@ -42,7 +42,7 @@ public class AboutService(
     };
   }
 
-  public async Task<SiteSideEditAboutViewModel?> GetDetailsForSiteAsync()
+  public async Task<SiteSideDetailsAboutViewModel?> GetDetailsForSiteAsync()
   {
     var model = await repository.GetDetailsAsync();
 
@@ -51,7 +51,7 @@ public class AboutService(
       return null;
     }
 
-    return new SiteSideEditAboutViewModel
+    return new SiteSideDetailsAboutViewModel
     {
       Id = model.Id,
       FirstName = model.FirstName,
@@ -116,25 +116,31 @@ public class AboutService(
         result = new About();
       }
 
-      if (model.AboutImage != null)
+      if (model.NewAboutImage != null)
       {
         // save and compress images
         using var memoryStream = new MemoryStream();
-        model.AboutImage.CopyTo(memoryStream);
+        model.NewAboutImage.CopyTo(memoryStream);
         var fileBytes = memoryStream.ToArray();
-        var (maxPath, largePath, thumbnailPath) = await imageService.CompressAsync(fileBytes, 1680, 400);
+        var imageResult = await imageService.CompressAsync(fileBytes);
+
+        // send old image to trash
+        if (result.AboutImage != null)
+        {
+          result.AboutImage.IsInTrash = true;
+        }
 
         // assign image to result view model
         result.AboutImage = new()
         {
-          MaxImage = maxPath,
-          LargeImage = largePath,
-          ThumbnailImage = thumbnailPath,
+          MaxImage = imageResult.MaxImage,
+          LargeImage = imageResult.LargeImage,
+          MediumImage = imageResult.MediumImage,
+          ThumbnailImage = imageResult.ThumbnailImage,
           Alt = "profile image"
         };
       }
 
-      result.Id = model.Id;
       result.FirstName = model.FirstName;
       result.LastName = model.LastName;
       result.MyTitles = model.MyTitles;
@@ -147,8 +153,6 @@ public class AboutService(
       result.Email = model.Email;
       result.BirthDate = model.BirthDate;
       result.Location = model.Location;
-      result.CreateDate = model.CreateDate;
-      result.UpdateDate = model.UpdateDate;
 
       if (needCreate)
       {

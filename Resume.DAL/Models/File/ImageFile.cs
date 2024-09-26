@@ -14,14 +14,15 @@ public class ImageFile : BaseEntity<int>
   public required string LargeImage { get; set; }
 
   [Required]
+  public required string MediumImage { get; set; }
+
+  [Required]
   public required string ThumbnailImage { get; set; }
 
   public string? Alt { get; set; }
 
   [Required]
-  public bool IsDeleted { get; set; } = false;
+  public bool IsInTrash { get; set; } = false;
 
-  public int AboutId { get; set; }
-  public About About { get; set; } = null!;
   #endregion
 }

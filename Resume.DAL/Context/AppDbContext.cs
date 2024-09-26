@@ -57,6 +57,22 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     );
     #endregion
 
+    #region Seed ImageFile
+    modelBuilder.Entity<ImageFile>().HasData(
+      new ImageFile()
+      {
+        Id = 1,
+        MaxImage = "/Site/assets/img/profile-img.jpg",
+        LargeImage = "/Site/assets/img/profile-img.jpg",
+        MediumImage = "/Site/assets/img/profile-img.jpg",
+        ThumbnailImage = "/Site/assets/img/profile-img.jpg",
+        Alt = "profile image",
+        CreateDate = DateTime.Now,
+        UpdateDate = DateTime.Now,
+      }
+    );
+    #endregion
+
     #region Seed About
     modelBuilder.Entity<About>().HasData(
       new About()
@@ -65,6 +81,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         FirstName = "Reza",
         LastName = "Nazeri",
         MyTitles = "Developer, Teacher",
+        ImageFileId = 1,
         Summary = "It takes great pains to benefit. His needs result from something that actually drives him away. Let them be what they want. Anyone whom anyone desires. And no one who hinders receives the others. Because he should flee in this office of convenience, which is here.",
         CurrentJobTitle = """Software Engineer at <a href="https://dotin.ir" target="_blank" style="color:green;">Dotin</a>""",
         CurrentJobTitleDescriptionTop = "It is important to take care of the patient, to be followed by the doctor, but it is a time of great pain and suffering.",
@@ -132,23 +149,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         CreateDate = DateTime.Now,
         UpdateDate = DateTime.Now,
       }
-    );
-    #endregion
-
-    #region Seed ImageFile
-    // separately with the foreign key for AboutId
-    modelBuilder.Entity<ImageFile>().HasData(
-        new ImageFile()
-        {
-          Id = 1,
-          MaxImage = "/images/me.webp",
-          LargeImage = "/images/me.webp",
-          ThumbnailImage = "/images/me.webp",
-          Alt = "profile image",
-          AboutId = 1, // Assign the foreign key to link it to About entity
-          CreateDate = DateTime.Now,
-          UpdateDate = DateTime.Now,
-        }
     );
     #endregion
 

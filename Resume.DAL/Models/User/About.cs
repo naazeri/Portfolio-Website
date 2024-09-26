@@ -10,6 +10,7 @@ public class About : BaseEntity<int>
   public string? LastName { get; set; }
   public string? MyTitles { get; set; }
   public List<SocialLink> SocialLinks { get; set; } = [];
+  public int ImageFileId { get; set; }
   public ImageFile? AboutImage { get; set; }
   public string? Summary { get; set; }
   public string? CurrentJobTitle { get; set; }

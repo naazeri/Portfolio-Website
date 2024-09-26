@@ -8,30 +8,34 @@
   <div class="card-body">
     <h5 class="card-title">Edit About</h5>
 
-    <form class="row g-3" asp-action="Update" method="post" enctype="multipart/form-data">
-      @* Render FirstName *@
-      <div class="col-12">
-        <label asp-for="FirstName" class="form-label"></label>
-        <input asp-for="FirstName" class="form-control">
-        <span asp-validation-for="FirstName" class="text-danger"></span>
-      </div>
+    @if (Model != null)
+    {
+      <partial name="_AdminMessageResult" />
 
-      @* Render LastName *@
-      <div class="col-12">
-        <label asp-for="LastName" class="form-label"></label>
-        <input asp-for="LastName" class="form-control">
-        <span asp-validation-for="LastName" class="text-danger"></span>
-      </div>
+      <form class="row g-3" asp-action="Update" method="post" enctype="multipart/form-data">
+        @* Render FirstName *@
+        <div class="col-12">
+          <label asp-for="FirstName" class="form-label"></label>
+          <input asp-for="FirstName" class="form-control">
+          <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
 
-      @* Render MyTitles *@
-      <div class="col-12">
-        <label asp-for="MyTitles" class="form-label"></label>
-        <input asp-for="MyTitles" placeholder="e.g: Developer, Freelancer, Teacher" class="form-control">
-        <span asp-validation-for="MyTitles" class="text-danger"></span>
-      </div>
+        @* Render LastName *@
+        <div class="col-12">
+          <label asp-for="LastName" class="form-label"></label>
+          <input asp-for="LastName" class="form-control">
+          <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
 
-      @* Render SocialLinks (complex property) *@
-      @* <div class="form-group">
+        @* Render MyTitles *@
+        <div class="col-12">
+          <label asp-for="MyTitles" class="form-label"></label>
+          <input asp-for="MyTitles" placeholder="e.g: Developer, Freelancer, Teacher" class="form-control">
+          <span asp-validation-for="MyTitles" class="text-danger"></span>
+        </div>
+
+        @* Render SocialLinks (complex property) *@
+        @* <div class="form-group">
       <label>Social Links</label>
       @for (int i = 0; i < Model.SocialLinks?.Count; i++)
       {
@@ -51,84 +55,90 @@
       }
       </div>
       *@
-      @* Render AboutImagePreview *@
-      @if (!string.IsNullOrEmpty(Model.AboutImagePreview))
-      {
-        <div class="col-12">
-          <label asp-for="AboutImagePreview" class="form-label"></label>
-          <div>
-            <img src="@Model.AboutImagePreview" width="200">
+        @* Render AboutImage Preview *@
+        @if (Model.AboutImage != null)
+        {
+          <div class="col-12">
+            <label asp-for="AboutImage" class="form-label"></label>
+            <div>
+              <img src="@Model.AboutImage.MediumImage" width="200">
+            </div>
           </div>
+        }
+        @* Render new AboutImage *@
+        <div class="col-12">
+          <label asp-for="NewAboutImage" class="form-label"></label>
+          <input asp-for="NewAboutImage" type="file" accept="image/*" class="form-control">
+          <span asp-validation-for="NewAboutImage" class="text-danger"></span>
         </div>
-      }
-      @* Render AboutImage *@
-      <div class="col-12">
-        <label asp-for="AboutImage" class="form-label"></label>
-        <input asp-for="AboutImage" type="file" accept="image/*" class="form-control">
-        <span asp-validation-for="AboutImage" class="text-danger"></span>
-      </div>
 
-      @* Render Summary *@
-      <div class="col-12">
-        <label asp-for="Summary" class="form-label"></label>
-        <textarea asp-for="Summary" rows="5" class="form-control"></textarea>
-        <span asp-validation-for="Summary" class="text-danger"></span>
-      </div>
+        @* Render Summary *@
+        <div class="col-12">
+          <label asp-for="Summary" class="form-label"></label>
+          <textarea asp-for="Summary" rows="5" class="form-control"></textarea>
+          <span asp-validation-for="Summary" class="text-danger"></span>
+        </div>
 
-      @* Render CurrentJobTitle *@
-      <div class="col-12">
-        <label asp-for="CurrentJobTitle" class="form-label"></label>
-        <input asp-for="CurrentJobTitle" class="form-control">
-        <span asp-validation-for="CurrentJobTitle" class="text-danger"></span>
-      </div>
+        @* Render CurrentJobTitle *@
+        <div class="col-12">
+          <label asp-for="CurrentJobTitle" class="form-label"></label>
+          <input asp-for="CurrentJobTitle" class="form-control">
+          <span asp-validation-for="CurrentJobTitle" class="text-danger"></span>
+        </div>
 
-      @* Render CurrentJobTitleDescriptionTop *@
-      <div class="col-12">
-        <label asp-for="CurrentJobTitleDescriptionTop" class="form-label"></label>
-        <textarea asp-for="CurrentJobTitleDescriptionTop" rows="5" class="form-control"></textarea>
-        <span asp-validation-for="CurrentJobTitleDescriptionTop" class="text-danger"></span>
-      </div>
+        @* Render CurrentJobTitleDescriptionTop *@
+        <div class="col-12">
+          <label asp-for="CurrentJobTitleDescriptionTop" class="form-label"></label>
+          <textarea asp-for="CurrentJobTitleDescriptionTop" rows="5" class="form-control"></textarea>
+          <span asp-validation-for="CurrentJobTitleDescriptionTop" class="text-danger"></span>
+        </div>
 
-      @* Render CurrentJobTitleDescriptionBottom *@
-      <div class="col-12">
-        <label asp-for="CurrentJobTitleDescriptionBottom" class="form-label"></label>
-        <textarea asp-for="CurrentJobTitleDescriptionBottom" rows="5" class="form-control"></textarea>
-        <span asp-validation-for="CurrentJobTitleDescriptionBottom" class="text-danger"></span>
-      </div>
+        @* Render CurrentJobTitleDescriptionBottom *@
+        <div class="col-12">
+          <label asp-for="CurrentJobTitleDescriptionBottom" class="form-label"></label>
+          <textarea asp-for="CurrentJobTitleDescriptionBottom" rows="5" class="form-control"></textarea>
+          <span asp-validation-for="CurrentJobTitleDescriptionBottom" class="text-danger"></span>
+        </div>
 
-      @* Render Mobile *@
-      <div class="col-12">
-        <label asp-for="Mobile" class="form-label"></label>
-        <input asp-for="Mobile" type="tel" class="form-control">
-        <span asp-validation-for="Mobile" class="text-danger"></span>
-      </div>
+        @* Render Mobile *@
+        <div class="col-12">
+          <label asp-for="Mobile" class="form-label"></label>
+          <input asp-for="Mobile" type="tel" class="form-control">
+          <span asp-validation-for="Mobile" class="text-danger"></span>
+        </div>
 
-      @* Render Email *@
-      <div class="col-12">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control">
-        <span asp-validation-for="Email" class="text-danger"></span>
-      </div>
+        @* Render Email *@
+        <div class="col-12">
+          <label asp-for="Email" class="form-label"></label>
+          <input asp-for="Email" class="form-control">
+          <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
 
-      @* Render BirthDate *@
-      <div class="col-12">
-        <label asp-for="BirthDate" class="form-label"></label>
-        <input asp-for="BirthDate" class="form-control">
-        <span asp-validation-for="BirthDate" class="text-danger"></span>
-      </div>
+        @* Render BirthDate *@
+        <div class="col-12">
+          <label asp-for="BirthDate" class="form-label"></label>
+          <input asp-for="BirthDate" class="form-control">
+          <span asp-validation-for="BirthDate" class="text-danger"></span>
+        </div>
 
-      @* Render Location *@
-      <div class="col-12">
-        <label asp-for="Location" class="form-label"></label>
-        <input asp-for="Location" class="form-control">
-        <span asp-validation-for="Location" class="text-danger"></span>
-      </div>
+        @* Render Location *@
+        <div class="col-12">
+          <label asp-for="Location" class="form-label"></label>
+          <input asp-for="Location" class="form-control">
+          <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
 
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Update</button>
-        <button type="reset" class="btn btn-secondary">Reset</button>
-      </div>
-    </form><!-- Vertical Form -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+        </div>
+      </form>
 
+      <!-- Form -->
+    }
+    else
+    {
+      <partial name="_AdminNotExist" />
+    }
   </div>
 </div>

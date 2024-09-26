@@ -1,7 +1,9 @@
-﻿namespace Resume.Bussines.Services.Interfaces;
+﻿using Resume.Bussines.Services.Implementations;
+
+namespace Resume.Bussines.Services.Interfaces;
 
 public interface IImageService
 {
-  Task<(string maxPath, string largePath, string thumbnailPath)> CompressAsync(byte[] imageBytes, int largeWidth, int thumbnailWidth);
-  Task<(string maxPath, string largePath, string thumbnailPath)> CompressAsync(string uploadPath, int largeWidth, int thumbnailWidth);
+  Task<ImageResult> CompressAsync(byte[] imageBytes, int? largeWidth = null, int? mediumWidth = null, int? thumbnailWidth = null);
+  Task<ImageResult> CompressAsync(string uploadPath, int? largeWidth = null, int? mediumWidth = null, int? thumbnailWidth = null);
 }

@@ -5,7 +5,7 @@ using Resume.DAL.ViewModels.Common;
 
 namespace Resume.DAL.ViewModels.AboutMe;
 
-public class SiteSideEditAboutViewModel : BaseDetailsViewModel<int>
+public class SiteSideDetailsAboutViewModel : BaseDetailsViewModel<int>
 {
   [Display(Name = "First Name")]
   [MaxLength(100, ErrorMessage = "The {0} field must be at most {1} characters long.")]

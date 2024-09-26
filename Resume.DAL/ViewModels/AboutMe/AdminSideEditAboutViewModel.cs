@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using Resume.DAL.Models.File;
 using Resume.DAL.Models.User;
 using Resume.DAL.ViewModels.Common;
 
@@ -28,10 +29,10 @@ public class AdminSideEditAboutViewModel : BaseDetailsViewModel<int>
   public List<SocialLink> SocialLinks { get; set; } = [];
 
   [Display(Name = "About Image")]
-  public IFormFile? AboutImage { get; set; }
+  public ImageFile? AboutImage { get; set; }
 
-  [Display(Name = "Current About Image Preview")]
-  public string? AboutImagePreview { get; set; }
+  [Display(Name = "New About Image")]
+  public IFormFile? NewAboutImage { get; set; }
 
   [Display(Name = "Summary")]
   [MaxLength(1000, ErrorMessage = "The {0} field must be at most {1} characters long.")]
