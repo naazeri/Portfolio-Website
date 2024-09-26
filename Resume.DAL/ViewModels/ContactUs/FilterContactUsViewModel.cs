@@ -23,9 +23,6 @@ public class FilterContactUsViewModel : BasePaging<ContactUsDetailsViewModel>
   [Display(Name = "Full Name")]
   public string? FullName { get; set; }
 
-  [Display(Name = "Mobile")]
-  public string? Mobile { get; set; }
-
   [Display(Name = "Email")]
   public string? Email { get; set; }
 

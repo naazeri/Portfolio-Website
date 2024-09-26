@@ -6,22 +6,33 @@ public static class DateExtensions
 {
   public static string ToShamsi(this DateTime date)
   {
+    if (date == null || date == DateTime.MinValue)
+    {
+      return string.Empty;
+    }
+
+    return ConvertToShamsi(date);
+  }
+
+  public static string ToShamsi(this DateOnly date)
+  {
+    if (date == null || date == DateOnly.MinValue)
+    {
+      return string.Empty;
+    }
+
+    DateTime dateTime = date.ToDateTime(new TimeOnly());
+    return ConvertToShamsi(dateTime);
+  }
+
+  private static string ConvertToShamsi(DateTime date)
+  {
     PersianCalendar pc = new();
     int year = pc.GetYear(date);
     int month = pc.GetMonth(date);
     int day = pc.GetDayOfMonth(date);
 
-    return $"{year}/{month.ToString("00")}/{day.ToString("00")}";
+    return $"{year}/{month:00}/{day:00}";
   }
 
-  public static string ToShamsi(this DateOnly date)
-  {
-    PersianCalendar pc = new();
-    DateTime dateTime = date.ToDateTime(new TimeOnly());
-    int year = pc.GetYear(dateTime);
-    int month = pc.GetMonth(dateTime);
-    int day = pc.GetDayOfMonth(dateTime);
-
-    return $"{year}/{month.ToString("00")}/{day.ToString("00")}";
-  }
 }

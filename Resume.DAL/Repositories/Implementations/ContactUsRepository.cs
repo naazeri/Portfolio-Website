@@ -26,12 +26,6 @@ public class ContactUsRepository(AppDbContext context) : IContactUsRepository
         .Where(x => EF.Functions.Like(x.FullName, $"%{filter.FullName}%"));
     }
 
-    if (!string.IsNullOrEmpty(filter.Mobile))
-    {
-      query = query
-        .Where(x => EF.Functions.Like(x.Mobile, $"%{filter.Mobile}%"));
-    }
-
     if (!string.IsNullOrEmpty(filter.Email))
     {
       query = query
@@ -65,7 +59,6 @@ public class ContactUsRepository(AppDbContext context) : IContactUsRepository
       Id = x.Id,
       Title = x.Title,
       FullName = x.FullName,
-      Mobile = x.Mobile,
       Email = x.Email,
       Message = x.Message,
       Answer = x.Answer,

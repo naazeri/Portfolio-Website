@@ -20,11 +20,11 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
   public DbSet<SiteConfig> SiteConfigs { get; set; }
   #endregion
 
-  #region on model creating
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
-    #region Seed data
-    // Seed User
+    #region Seeding data
+
+    #region Seed User
     modelBuilder.Entity<AppUser>().HasData(
       new AppUser()
       {
@@ -32,13 +32,16 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         FirstName = "Admin",
         LastName = "Admin",
         Email = "admin@gmail.com",
-        Mobile = "09123456789",
+        Mobile = "+989123456789",
         Password = EncodePasswordMd5("123456"),
         IsActive = true,
+        CreateDate = DateTime.Now,
+        UpdateDate = DateTime.Now,
       }
     );
+    #endregion
 
-    // Seed SiteConfig
+    #region Seed SiteConfig
     modelBuilder.Entity<SiteConfig>().HasData(
       new SiteConfig()
       {
@@ -48,10 +51,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         SiteIcon = "/Site/assets/img/favicon.png",
         ShowSkillsSection = false,
         ShowTestimonialsSection = false,
+        CreateDate = DateTime.Now,
+        UpdateDate = DateTime.Now,
       }
     );
+    #endregion
 
-    // Seed About
+    #region Seed About
     modelBuilder.Entity<About>().HasData(
       new About()
       {
@@ -67,10 +73,14 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         Email = "reza.armani75@gmail.com",
         BirthDate = new DateOnly(1996, 4, 10),
         Location = "Mashhad, Iran",
+        CreateDate = DateTime.Now,
+        UpdateDate = DateTime.Now,
       }
     );
+    #endregion
 
-    // Seed SocialLink separately with the foreign key for AboutId
+    #region Seed SocialLink
+    // separately with the foreign key for AboutId
     modelBuilder.Entity<SocialLink>().HasData(
       new SocialLink()
       {
@@ -78,7 +88,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         Title = "Linkedin",
         LinkAddress = "https://linkedin.com/in/rezanazeri",
         IconName = "bi-linkedin",
-        AboutId = 1 // Link to the About entity
+        AboutId = 1, // Link to the About entity
+        CreateDate = DateTime.Now,
+        UpdateDate = DateTime.Now,
       },
       new SocialLink()
       {
@@ -86,7 +98,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         Title = "Youtube",
         LinkAddress = "https://youtube.com/@naazeri",
         IconName = "bi-youtube",
-        AboutId = 1 // Link to the About entity
+        AboutId = 1,
+        CreateDate = DateTime.Now,
+        UpdateDate = DateTime.Now,
       },
       new SocialLink()
       {
@@ -94,7 +108,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         Title = "Github",
         LinkAddress = "https://github.com/naazeri",
         IconName = "bi-github",
-        AboutId = 1 // Link to the About entity
+        AboutId = 1,
+        CreateDate = DateTime.Now,
+        UpdateDate = DateTime.Now,
       },
       new SocialLink()
       {
@@ -102,7 +118,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         Title = "X",
         LinkAddress = "https://x.com/r_nazeri",
         IconName = "bi-twitter-x",
-        AboutId = 1 // Link to the About entity
+        AboutId = 1,
+        CreateDate = DateTime.Now,
+        UpdateDate = DateTime.Now,
       },
       new SocialLink()
       {
@@ -110,11 +128,15 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         Title = "Instagram",
         LinkAddress = "https://instagram.com/re_nazeri",
         IconName = "bi-instagram",
-        AboutId = 1 // Link to the About entity
+        AboutId = 1,
+        CreateDate = DateTime.Now,
+        UpdateDate = DateTime.Now,
       }
     );
+    #endregion
 
-    // Seed ImageFile separately with the foreign key for AboutId
+    #region Seed ImageFile
+    // separately with the foreign key for AboutId
     modelBuilder.Entity<ImageFile>().HasData(
         new ImageFile()
         {
@@ -123,11 +145,14 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
           LargeImage = "/images/me.webp",
           ThumbnailImage = "/images/me.webp",
           Alt = "profile image",
-          AboutId = 1 // Assign the foreign key to link it to About entity
+          AboutId = 1, // Assign the foreign key to link it to About entity
+          CreateDate = DateTime.Now,
+          UpdateDate = DateTime.Now,
         }
     );
+    #endregion
 
-    // Seed ContactUs
+    #region Seed ContactUs
     modelBuilder.Entity<ContactUs>().HasData(
         new ContactUs()
         {
@@ -137,8 +162,11 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
           Email = "reza.armani75@gmail.com",
           Message = "hi\nhow are you doin?",
           Answer = null,
+          CreateDate = DateTime.Now,
+          UpdateDate = DateTime.Now,
         }
     );
+    #endregion
 
     #endregion
     // foreach (var entityType in modelBuilder.Model.GetEntityTypes().SelectMany(s => s.GetForeignKeys()))
@@ -148,7 +176,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
     base.OnModelCreating(modelBuilder);
   }
-  #endregion
 
   #region BeforeSave
   public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -184,7 +211,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
   }
   #endregion
 
-  private string EncodePasswordMd5(string password)
+  private static string EncodePasswordMd5(string password)
   {
     byte[] originalBytes = Encoding.Default.GetBytes(password);
     byte[] encodedBytes = MD5.HashData(originalBytes);

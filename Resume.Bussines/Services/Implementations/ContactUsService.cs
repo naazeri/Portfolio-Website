@@ -37,7 +37,6 @@ public class ContactUsService(
       Id = contactUs.Id,
       Title = contactUs.Title,
       FullName = contactUs.FullName,
-      Mobile = contactUs.Mobile,
       Email = contactUs.Email,
       Message = contactUs.Message,
       Answer = contactUs.Answer,
@@ -51,7 +50,6 @@ public class ContactUsService(
     var model = new ContactUs()
     {
       Title = viewModel.Title,
-      Mobile = viewModel.Mobile,
       Email = viewModel.Email,
       FullName = viewModel.FullName,
       Message = viewModel.Message,

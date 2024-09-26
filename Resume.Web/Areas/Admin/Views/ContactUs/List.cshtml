@@ -23,10 +23,6 @@
               <input asp-for="FullName" type="text" class="form-control">
             </div>
             <div class="col-auto">
-              <label asp-for="Mobile" class="form-label"></label>
-              <input asp-for="Mobile" type="tel" class="form-control">
-            </div>
-            <div class="col-auto">
               <label asp-for="Email" class="form-label"></label>
               <input asp-for="Email" type="text" class="form-control">
             </div>
@@ -61,7 +57,6 @@
                   <th scope="col">#</th>
                   <th scope="col">Title</th>
                   <th scope="col">Full Name</th>
-                  <th scope="col">Mobile</th>
                   <th scope="col">Email</th>
                   <th scope="col">Answer Status</th>
                   <th scope="col" data-type="date" data-format="YYYY/DD/MM">Created Date</th>
@@ -76,7 +71,6 @@
                     <th scope="row">@entity.Id</th>
                     <td>@entity.Title</td>
                     <td>@entity.FullName</td>
-                    <td>@entity.Mobile</td>
                     <td>@entity.Email</td>
                     <td>
                       @if (entity.Answer == null || entity.Answer == "")
