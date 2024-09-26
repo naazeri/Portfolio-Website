@@ -1,7 +1,33 @@
 @using Resume.DAL.ViewModels.User
+
 @{
-  UserDetailsViewModel user = ViewData["User"] as UserDetailsViewModel ?? new UserDetailsViewModel();
+  var routeData = Context.GetRouteData();
+  string currentController = routeData.Values["controller"]?.ToString() ?? "Home";
+  string currentAction = routeData.Values["action"]?.ToString() ?? "Index";
+
+  var IsActive = (string controller) =>
+  {
+    bool isActive = string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase);
+
+    return isActive ? "" : "collapsed";
+  };
+
+  var IsActiveUl = (string controller) =>
+  {
+    bool isActive = string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase);
+
+    return isActive ? "show" : "";
+  };
+
+  var IsSubActive = (string controller, string action) =>
+  {
+    bool isActive = string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase) &&
+  string.Equals(currentAction, action, StringComparison.OrdinalIgnoreCase);
+
+    return isActive ? "active" : "";
+  };
 }
+
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -9,7 +35,7 @@
 
     @* Dashboard *@
     <li class="nav-item">
-      <a class="nav-link " asp-controller="Home" asp-action="">
+      <a class="nav-link @IsActive("Home")" asp-controller="Home" asp-action="Index">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -17,16 +43,16 @@
 
     @* Site *@
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#site-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-house"></i>
+      <a class="nav-link @IsActive("About")" data-bs-target="#site-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-globe2"></i>
         <span>Site</span>
         <i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="site-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+      <ul id="site-nav" class="nav-content collapse @IsActiveUl("About")" data-bs-parent="#sidebar-nav">
 
-        @* Site About *@
+        @* Site->About *@
         <li>
-          <a asp-area="admin" asp-controller="about" asp-action="update">
+          <a asp-controller="About" asp-action="Index" class="@IsSubActive("About", "Index")">
             <i class="bi bi-circle"></i>
             <span>About</span>
           </a>
@@ -35,31 +61,43 @@
       </ul>
     </li><!-- End User Nav -->
 
+    @* User *@
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-person"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
+      <a class="nav-link @IsActive("User")" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-person"></i>
+        <span>Users</span>
+        <i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="user-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="user-nav" class="nav-content collapse @IsActiveUl("User")" data-bs-parent="#sidebar-nav">
+        @* User->List *@
         <li>
-          <a asp-area="Admin" asp-controller="User" asp-action="List">
-            <i class="bi bi-circle"></i><span>List</span>
+          <a asp-controller="User" asp-action="Index" class="@IsSubActive("User", "Index")">
+            <i class="bi bi-circle"></i>
+            <span>List</span>
           </a>
         </li>
+
+        @* User->Create *@
         <li>
-          <a asp-area="Admin" asp-controller="User" asp-action="Create">
-            <i class="bi bi-circle"></i><span>Create</span>
+          <a asp-controller="User" asp-action="Create" class="@IsSubActive("User", "Create")">
+            <i class="bi bi-circle"></i>
+            <span>Create</span>
           </a>
         </li>
       </ul>
     </li><!-- End User Nav -->
 
+    @* Contact *@
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#contact-us-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-envelope"></i><span>Contact Us</span><i class="bi bi-chevron-down ms-auto"></i>
+      <a class="nav-link @IsActive("ContactUs")" data-bs-target="#contact-us-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-envelope"></i>
+        <span>Contact Us</span>
+        <i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="contact-us-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id="contact-us-nav" class="nav-content collapse @IsActiveUl("ContactUs")" data-bs-parent="#sidebar-nav">
+        @* Contact->List *@
         <li>
-          <a asp-area="Admin" asp-controller="ContactUs" asp-action="List">
+          <a asp-controller="ContactUs" asp-action="Index" class="@IsSubActive("ContactUs", "Index")">
             <i class="bi bi-circle"></i><span>List</span>
           </a>
         </li>
