@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Resume.Web.Components;
+namespace Resume.Web.Areas.Admin.Components;
 
 public class PageTitleViewComponent : ViewComponent
 {

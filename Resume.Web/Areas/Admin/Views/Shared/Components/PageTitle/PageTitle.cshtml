@@ -1,22 +1,12 @@
 @using Microsoft.AspNetCore.Http.Extensions;
 @using Resume.Bussines.Extensions;
+
 @{
   var routeData = Context.GetRouteData();
   string currentControllerName = routeData.Values["controller"]?.ToString() ?? "Home";
   string currentActionName = routeData.Values["action"]?.ToString() ?? "Index";
   bool isIndexAction = string.Equals(currentActionName, "Index", StringComparison.OrdinalIgnoreCase);
   string pageTitle = isIndexAction ? currentControllerName : currentActionName;
-  @* // Get the current request path
-var path = Context.Request.Path;
-
-// Convert path to lowercase to ensure case-insensitive matching
-var segments = path.ToString().ToLower().Split('/', StringSplitOptions.RemoveEmptyEntries);
-if (segments.Length < 2)
-{
-segments = ["home"];
-}
-
-string currentPage = segments.Last().MakeFirstLetterUpper(); *@
 }
 
 <div class="pagetitle">
@@ -26,23 +16,15 @@ string currentPage = segments.Last().MakeFirstLetterUpper(); *@
       <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
       @if (isIndexAction)
       {
-        <li class="breadcrumb-item active">
-          <a asp-controller="@currentControllerName">@currentControllerName</a>
-        </li>
+          <li class="breadcrumb-item active">
+            <a asp-controller="@currentControllerName">@currentControllerName</a>
+          </li>
       }
       else
       {
-        <li class="breadcrumb-item">@currentControllerName</li>
-        <li class="breadcrumb-item active">@currentActionName</li>
+          <li class="breadcrumb-item">@currentControllerName</li>
+          <li class="breadcrumb-item active">@currentActionName</li>
       }
-      @* @for (int i = 1; i < segments.Length - 1; i++)
-      {
-      // Render intermediate breadcrumbs as clickable links
-      <li class="breadcrumb-item">@segments[i].MakeFirstLetterUpper()</li>
-      } *@
-
-      @* Render the current page as the active breadcrumb item *@
-      @* <li class="breadcrumb-item active">@currentPage</li> *@
     </ol>
   </nav>
 </div><!-- End Page Title -->

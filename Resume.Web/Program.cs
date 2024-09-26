@@ -5,6 +5,7 @@ var config = builder.Configuration;
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers(); // Added to support API controllers
+builder.Services.ConfigOptionPattern(config);
 builder.Services.RegisterService();
 builder.Services.ConfigDB(config);
 builder.Services.ConfigAuth(config);

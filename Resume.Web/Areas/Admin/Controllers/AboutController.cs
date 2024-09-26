@@ -7,14 +7,14 @@ namespace Resume.Web.Areas.Admin.Controllers;
 public class AboutController(IAboutService aboutService) : AdminBaseController
 {
   #region Update
-  public async Task<IActionResult> Update()
+  public async Task<IActionResult> Index()
   {
     var model = await aboutService.GetDetailsForAdminAsync();
     return View(model);
   }
 
   [HttpPost]
-  public async Task<IActionResult> Update(AdminSideEditAboutViewModel model)
+  public async Task<IActionResult> Index(AdminSideEditAboutViewModel model)
   {
     if (!ModelState.IsValid)
     {
@@ -27,7 +27,7 @@ public class AboutController(IAboutService aboutService) : AdminBaseController
     {
       case AdminSideEditAboutResult.Success:
         TempData[SuccessMessage] = "About updated successfully.";
-        return RedirectToAction(nameof(Update));
+        return RedirectToAction(nameof(Index));
 
       case AdminSideEditAboutResult.Error:
         TempData[ErrorMessage] = "Error, please try again.";

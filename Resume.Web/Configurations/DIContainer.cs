@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Resume.Bussines.Services.Implementations;
 using Resume.Bussines.Services.Interfaces;
 using Resume.DAL.Context;
+using Resume.DAL.Models.Config;
 using Resume.DAL.Repositories.Implementations;
 using Resume.DAL.Repositories.Interfaces;
 
@@ -10,6 +11,11 @@ namespace Resume.Web.Configurations;
 
 public static class DIContainer
 {
+  public static void ConfigOptionPattern(this IServiceCollection services, ConfigurationManager configuration)
+  {
+    services.Configure<ImageConfiguration>(configuration.GetSection(ImageConfiguration.SectionName));
+  }
+
   public static void RegisterService(this IServiceCollection services)
   {
     #region Repositories

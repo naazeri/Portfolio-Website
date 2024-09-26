@@ -8,7 +8,7 @@ public class UserController(IUserService userService) : AdminBaseController
 {
   #region List
 
-  public async Task<IActionResult> List(FilterUserViewModel filter)
+  public async Task<IActionResult> Index(FilterUserViewModel filter)
   {
     var model = await userService.GetAllAsync(filter);
     return View(model);
@@ -41,7 +41,7 @@ public class UserController(IUserService userService) : AdminBaseController
     {
       case CreateUserResult.Success:
         TempData[SuccessMessage] = "New user created successfully.";
-        return RedirectToAction(nameof(List));
+        return RedirectToAction(nameof(Index));
 
       case CreateUserResult.Error:
         TempData[ErrorMessage] = "Error, please try again.";
@@ -82,7 +82,7 @@ public class UserController(IUserService userService) : AdminBaseController
     {
       case EditUserResult.Success:
         TempData[SuccessMessage] = "User updated successfully.";
-        return RedirectToAction(nameof(List));
+        return RedirectToAction(nameof(Index));
 
       case EditUserResult.UserNotFound:
         TempData[ErrorMessage] = "User not found.";

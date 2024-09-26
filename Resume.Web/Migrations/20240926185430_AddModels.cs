@@ -159,38 +159,38 @@ namespace Resume.Web.Migrations
             migrationBuilder.InsertData(
                 table: "ContactUs",
                 columns: new[] { "Id", "Answer", "CreateDate", "Email", "FullName", "Message", "Title", "UpdateDate" },
-                values: new object[] { 1, null, new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9100), "reza.armani75@gmail.com", "Reza Nazeri", "hi\nhow are you doin?", "Test 1", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9100) });
+                values: new object[] { 1, null, new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5620), "reza.armani75@gmail.com", "Reza Nazeri", "hi\nhow are you doin?", "Test 1", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5620) });
 
             migrationBuilder.InsertData(
                 table: "ImageFiles",
                 columns: new[] { "Id", "Alt", "CreateDate", "IsInTrash", "LargeImage", "MaxImage", "MediumImage", "ThumbnailImage", "UpdateDate" },
-                values: new object[] { 1, "profile image", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8970), false, "/Site/assets/img/profile-img.jpg", "/Site/assets/img/profile-img.jpg", "/Site/assets/img/profile-img.jpg", "/Site/assets/img/profile-img.jpg", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8970) });
+                values: new object[] { 1, "profile image", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5494), false, "/Site/assets/img/profile-img.jpg", "/Site/assets/img/profile-img.jpg", "/Site/assets/img/profile-img.jpg", "/Site/assets/img/profile-img.jpg", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5494) });
 
             migrationBuilder.InsertData(
                 table: "SiteConfigs",
                 columns: new[] { "Id", "CreateDate", "ShowAboutSection", "ShowContactSection", "ShowFooter1Section", "ShowFooter2Section", "ShowPortfolioSection", "ShowResumeSection", "ShowServicesSection", "ShowSkillsSection", "ShowStatsSection", "ShowTestimonialsSection", "SiteIcon", "SiteTitle", "Tagline", "UpdateDate" },
-                values: new object[] { 1, new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8953), true, true, true, true, true, true, true, false, true, false, "/Site/assets/img/favicon.png", "John Doe Resume", "My Portfolio", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8953) });
+                values: new object[] { 1, new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5476), true, true, true, true, true, true, true, false, true, false, "/Site/assets/img/favicon.png", "John Doe Resume", "My Portfolio", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5477) });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreateDate", "Email", "FirstName", "IsActive", "LastName", "Mobile", "Password", "UpdateDate" },
-                values: new object[] { 1, new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8795), "admin@gmail.com", "Admin", true, "Admin", "+989123456789", "E1-0A-DC-39-49-BA-59-AB-BE-56-E0-57-F2-0F-88-3E", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(8805) });
+                values: new object[] { 1, new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5339), "admin@gmail.com", "Admin", true, "Admin", "+989123456789", "E1-0A-DC-39-49-BA-59-AB-BE-56-E0-57-F2-0F-88-3E", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5354) });
 
             migrationBuilder.InsertData(
                 table: "About",
                 columns: new[] { "Id", "BirthDate", "CreateDate", "CurrentJobTitle", "CurrentJobTitleDescriptionBottom", "CurrentJobTitleDescriptionTop", "Email", "FirstName", "ImageFileId", "LastName", "Location", "Mobile", "MyTitles", "Summary", "UpdateDate" },
-                values: new object[] { 1, new DateOnly(1996, 4, 10), new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9003), "Software Engineer at <a href=\"https://dotin.ir\" target=\"_blank\" style=\"color:green;\">Dotin</a>", "Therefore, choosing the services of labor and pains is the choice of the services. Anyone can get everything and that. There are no complaints from the prosecutors about their services at the time. And all his Because of desire, as said, most offices indeed. But those who are not to be repulsed will therefore be pursued.", "It is important to take care of the patient, to be followed by the doctor, but it is a time of great pain and suffering.", "reza.armani75@gmail.com", "Reza", 1, "Nazeri", "Mashhad, Iran", "+989123456789", "Developer, Teacher", "It takes great pains to benefit. His needs result from something that actually drives him away. Let them be what they want. Anyone whom anyone desires. And no one who hinders receives the others. Because he should flee in this office of convenience, which is here.", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9003) });
+                values: new object[] { 1, new DateOnly(1996, 4, 10), new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5524), "Software Engineer at <a href=\"https://dotin.ir\" target=\"_blank\" style=\"color:green;\">Dotin</a>", "Therefore, choosing the services of labor and pains is the choice of the services. Anyone can get everything and that. There are no complaints from the prosecutors about their services at the time. And all his Because of desire, as said, most offices indeed. But those who are not to be repulsed will therefore be pursued.", "It is important to take care of the patient, to be followed by the doctor, but it is a time of great pain and suffering.", "reza.armani75@gmail.com", "Reza", 1, "Nazeri", "Mashhad, Iran", "+989123456789", "Developer, Teacher", "It takes great pains to benefit. His needs result from something that actually drives him away. Let them be what they want. Anyone whom anyone desires. And no one who hinders receives the others. Because he should flee in this office of convenience, which is here.", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5525) });
 
             migrationBuilder.InsertData(
                 table: "SocialLinks",
                 columns: new[] { "Id", "AboutId", "CreateDate", "IconName", "IsActive", "LinkAddress", "Title", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9070), "bi-linkedin", true, "https://linkedin.com/in/rezanazeri", "Linkedin", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9071) },
-                    { 2, 1, new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9072), "bi-youtube", true, "https://youtube.com/@naazeri", "Youtube", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9073) },
-                    { 3, 1, new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9074), "bi-github", true, "https://github.com/naazeri", "Github", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9075) },
-                    { 4, 1, new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9076), "bi-twitter-x", true, "https://x.com/r_nazeri", "X", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9076) },
-                    { 5, 1, new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9078), "bi-instagram", true, "https://instagram.com/re_nazeri", "Instagram", new DateTime(2024, 9, 26, 10, 29, 46, 622, DateTimeKind.Local).AddTicks(9078) }
+                    { 1, 1, new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5539), "bi-linkedin", true, "https://linkedin.com/in/rezanazeri", "Linkedin", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5540) },
+                    { 2, 1, new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5541), "bi-youtube", true, "https://youtube.com/@naazeri", "Youtube", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5542) },
+                    { 3, 1, new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5543), "bi-github", true, "https://github.com/naazeri", "Github", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5543) },
+                    { 4, 1, new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5545), "bi-twitter-x", true, "https://x.com/r_nazeri", "X", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5545) },
+                    { 5, 1, new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5546), "bi-instagram", true, "https://instagram.com/re_nazeri", "Instagram", new DateTime(2024, 9, 26, 22, 24, 30, 382, DateTimeKind.Local).AddTicks(5547) }
                 });
 
             migrationBuilder.CreateIndex(

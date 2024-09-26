@@ -8,7 +8,7 @@ public class ContactUsController(IContactUsService contactUsService) : AdminBase
 {
 
   #region List
-  public async Task<IActionResult> List(FilterContactUsViewModel filter)
+  public async Task<IActionResult> Index(FilterContactUsViewModel filter)
   {
     var model = await contactUsService.GetAllAsync(filter);
     return View(model);
