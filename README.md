@@ -4,9 +4,9 @@
 
 ### Add new migration
 
-`dotnet ef migrations add <migration_name> --project Resume.Web`
+`dotnet ef migrations add AddModels --project Resume.DAL/Resume.DAL.csproj --startup-project Resume.Web/Resume.Web.csproj --context Resume.DAL.Context.AppDbContext --configuration Debug`
 
-### Apply migration
+### Apply migration(essensial for seed database)
 
 `dotnet ef database update --project Resume.Web`
 
