@@ -22,7 +22,7 @@
   </header>
 
   <main class="main">
-    @if (!string.Equals(Context.Request.Path, "/", StringComparison.OrdinalIgnoreCase))
+    @if (!string.Equals(Context.Request.Path, "/", StringComparison.Ordinal))
     {
       @await Component.InvokeAsync("Header")
     }

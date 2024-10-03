@@ -116,6 +116,7 @@ public class AboutService(
         result = new About();
       }
 
+      // save new about image
       if (model.NewAboutImage != null)
       {
         // save and compress images

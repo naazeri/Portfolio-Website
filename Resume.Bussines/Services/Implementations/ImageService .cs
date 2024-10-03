@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Resume.Bussines.Services.Interfaces;
 using Resume.DAL.Models.Config;
@@ -72,7 +71,12 @@ public class ImageService(
     }
 
     var now = DateTime.Now;
-    var reletivePath = Path.Combine(imageConfig.Value.Directory.Root, now.Year.ToString(), now.Month.ToString(), subDirName);
+    var reletivePath = Path.Combine(
+      imageConfig.Value.Directory.Root,
+      now.Year.ToString(),
+      now.Month.ToString(),
+      subDirName
+    );
     var saveFullPath = Path.Combine(hostingEnvironment.WebRootPath, reletivePath);
     var imageName = $"{Guid.NewGuid()}.webp";
 
@@ -81,7 +85,11 @@ public class ImageService(
       Directory.CreateDirectory(saveFullPath);
     }
 
-    await image.SaveAsWebpAsync(Path.Combine(saveFullPath, imageName), new WebpEncoder { Quality = quality });
+    await image.SaveAsWebpAsync(
+      Path.Combine(saveFullPath, imageName),
+      new WebpEncoder { Quality = quality }
+    );
+
     return $"/{reletivePath.Replace("\\", "/")}/{imageName}";
   }
 

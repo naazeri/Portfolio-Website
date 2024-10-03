@@ -7,22 +7,22 @@
 
   var IsActive = (string controller) =>
   {
-    bool isActive = string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase);
+    bool isActive = string.Equals(currentController, controller, StringComparison.CurrentCultureIgnoreCase);
 
     return isActive ? "" : "collapsed";
   };
 
   var IsActiveUl = (string controller) =>
   {
-    bool isActive = string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase);
+    bool isActive = string.Equals(currentController, controller, StringComparison.CurrentCultureIgnoreCase);
 
     return isActive ? "show" : "";
   };
 
   var IsSubActive = (string controller, string action) =>
   {
-    bool isActive = string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase) &&
-  string.Equals(currentAction, action, StringComparison.OrdinalIgnoreCase);
+    bool isActive = string.Equals(currentController, controller, StringComparison.CurrentCultureIgnoreCase) &&
+  string.Equals(currentAction, action, StringComparison.CurrentCultureIgnoreCase);
 
     return isActive ? "active" : "";
   };
